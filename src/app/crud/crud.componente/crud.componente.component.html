@@ -1,0 +1,29 @@
+<form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+  <label>
+    <span>Full name</span>
+    <input
+      type="text"
+      placeholder="Ingrese el nombre"
+      formControlName="nombre">
+  </label>
+  <label>
+      <span>Genero</span>
+      <input
+        type="text"
+        placeholder="Ingrese el Genero"
+        formControlName="genero">
+    </label>
+    <label>
+      <span>Especie</span>
+      <input
+        type="text"
+        placeholder="Ingrese el especie"
+        formControlName="especie">
+    </label>
+  <button type="submit">Sign up</button>
+</form>
+<app-lista-formulario [listaFormulario]="getListaDatos()">
+</app-lista-formulario>
+
+
+
