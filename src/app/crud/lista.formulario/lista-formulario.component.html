@@ -3,7 +3,7 @@
     <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let personaje of listaFormulario">
       <mat-card class="mat-elevation-z4" >
         <mat-card-header>
-          <mat-card-title id="textInsideForm">{{personaje.id}}. {{personaje.nombre}}</mat-card-title>
+          <mat-card-title id="textInsideForm"> {{personaje.nombre}}</mat-card-title>
           <mat-card-subtitle id="textInsideForm">{{personaje.genero}}</mat-card-subtitle>
         </mat-card-header>
         <img mat-card-image src="{{personaje.image}}">
@@ -11,13 +11,41 @@
           <p id="textInsideForm">
             Tipo de especie: {{personaje.especie}}
           </p>
+          <button mat-raised-button (click)="openDialog()">Pick one</button>
+          <br>
+          <form novalidate [formGroup]="formulario" (ngSubmit)="onSubmit(personaje.id)">
+            <input class="form-control" type="hidden" value={{personaje.id}}
+            readonly formControlName="id">
+            <label style="color:aliceblue">
+              <span>Full name</span>
+              <input
+                type="text"
+                placeholder="Ingrese el nombre"
+                formControlName="nombre">
+            </label>
+            <label style="color:aliceblue">
+                <span>Genero</span>
+                <input
+                  type="text"
+                  placeholder="Ingrese el Genero"
+                  formControlName="genero">
+              </label>
+              <label style="color:aliceblue">
+                <span>Especie</span>
+                <input
+                  type="text"
+                  placeholder="Ingrese el especie"
+                  formControlName="especie">
+              </label>
+            <button type="submit" [disabled]="formulario.invalid">Modificar</button>
+          </form>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button>LIKE</button>
+          <button mat-button>Eliminar</button>
           <button mat-button>SHARE</button>
         </mat-card-actions>
       </mat-card>
     </div>
   </div>
-
   </div>
+

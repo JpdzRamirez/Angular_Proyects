@@ -5,8 +5,6 @@ import { TraerDatosService } from 'src/app/servicios/traer-datos.service';
 import { ModificarDatosService } from 'src/app/servicios/modificar-datos.service';
 
 
-import { FormControl, FormGroup } from '@angular/forms';
-
 @Component({
   selector: 'app-crud-components',
   templateUrl: './crud.componente.component.html',
@@ -14,24 +12,15 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class CrudComponenteComponent implements OnInit  {
 
-  formulario: FormGroup;
-
   private listaDatos:Array<Persona>=[];
 
-  constructor(private servicioGet:TraerDatosService, private servicioPost:ModificarDatosService ){
-    this.formulario = new FormGroup({
-      nombre: new FormControl(''),
-      genero: new FormControl(''),
-      especie: new FormControl('')})
+  constructor(private servicioGet:TraerDatosService,private servicioPOST:ModificarDatosService){
   }
-  onSubmit(){
-    console.log(this.formulario.value);
-  }
+
 
   ngOnInit(){
     this.servicioGet.getUsers().subscribe(resp=>{
       this.setListaDatos(resp.results);
-      console.log(resp.resuls);
       });
 
   }
@@ -40,6 +29,7 @@ export class CrudComponenteComponent implements OnInit  {
   }
 
   setListaDatos(lista:any){
+    console.log(lista);
     for(var i=0; i<lista.length; i++){
       let personaTemp:Persona =new Persona();
       personaTemp.setId(lista[i].id);
@@ -50,8 +40,10 @@ export class CrudComponenteComponent implements OnInit  {
       this.listaDatos.push(personaTemp);
     }
   }
-  addDatosLista(persona:Persona):void {
-    this.listaDatos.push(persona);
+
+  editItem(nuevoItem:string):void {
+    console.log(nuevoItem);
+    //this.listaDatos.push(persona);
   }
   clear(){
     this.listaDatos.length = 0;
