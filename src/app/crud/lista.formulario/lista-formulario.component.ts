@@ -22,6 +22,7 @@ export class ListaFormularioComponent {
   public especie:string='';
 
 
+
   constructor(public dialog: MatDialog ) {
     this.formulario = new FormGroup({
       id:new FormControl(''),
@@ -36,7 +37,7 @@ export class ListaFormularioComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log('The dialog was closed' + result);
     });
   }
   onSubmit(id:string):void {

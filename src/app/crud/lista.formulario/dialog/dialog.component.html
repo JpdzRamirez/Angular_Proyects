@@ -1,10 +1,19 @@
-<ol>
-  <li>
+<h2 mat-dialog-title>User Detail</h2>
+<div mat-dialog-content [formGroup]="form">
+  <p>Name:
+  </p>
     <mat-form-field appearance="fill">
-      <mat-label>What's your name?</mat-label>
-      <input matInput [(ngModel)]="nombre">
+      <input matInput formControlName="nombre" placeholder="Ingrese Nombre">
     </mat-form-field>
-  </li>
-  <li>
 
-</ol>
+  <p>City:
+  </p>
+    <mat-form-field appearance="fill">
+      <input matInput formControlName="genero" placeholder="Ingrese Genero">
+    </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="close()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div>
