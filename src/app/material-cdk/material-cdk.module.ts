@@ -17,10 +17,12 @@ import { FormsModule } from '@angular/forms';
 
 //Dialog
 import {MatDialogModule} from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+
 
 const components = [MatToolbarModule, MatIconModule,MatCardModule,
                     MatButtonModule,FlexLayoutModule,ReactiveFormsModule,
-                    MatDialogModule,FormsModule,MatFormFieldModule,
+                    MatDialogModule,FormsModule,MatFormFieldModule,MatInputModule,
                    ];
 @NgModule({
   declarations: [],

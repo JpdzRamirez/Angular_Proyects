@@ -4,6 +4,11 @@ import { FormControl, FormGroup, Validators  } from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
 
+export interface personaje {
+  nombre:string;
+  especie:string;
+  genero:string;
+}
 @Component({
   selector: 'app-lista-formulario',
   templateUrl: './lista-formulario.component.html',
@@ -14,30 +19,25 @@ export class ListaFormularioComponent {
   @Input() listaFormulario: any={};
   @Output() newItemEvent = new EventEmitter<string>();
 
-  formulario: FormGroup;
+  private personaje={nombre:'',genero:'',especie:''};
 
-  public id:string ='';
-  public nombre:string='';
-  public genero:string='';
-  public especie:string='';
-
-
+  formulario:FormGroup;
 
   constructor(public dialog: MatDialog ) {
-    this.formulario = new FormGroup({
-      id:new FormControl(''),
-      nombre: new FormControl('',Validators.required),
-      genero: new FormControl('',Validators.required),
-      especie: new FormControl('',Validators.required),
+    this.formulario=new FormGroup({
+      nombre:new FormControl(''),
+      genero:new FormControl(''),
+      especie:new FormControl('')
     })
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogComponent, {
-      data: {nombre: this.nombre, genero: this.genero, especie:this.especie},
+      data: {data: this.personaje, height:'350px', width:'250px',autoFocus:true},
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed' + result);
+      console.log('The dialog was closed' + result?.nombre+'-'+result?.genero+'-'
+      +result?.especie+'-'+result?.genero);
     });
   }
   onSubmit(id:string):void {

@@ -1,27 +1,24 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { FormGroup } from '@angular/forms';
 import { FormControl,Validators } from '@angular/forms';
 
-export interface DialogData {
+export interface personaje {
   nombre:string;
   especie:string;
   genero:string;
 }
-
-
 @Component({
-  selector: 'app-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss']
 })
-export class DialogComponent implements OnInit {
+export class DialogComponent  {
 
   form: FormGroup;
 
   constructor(
     private dialogRef: MatDialogRef<DialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(MAT_DIALOG_DATA) public data: personaje,
   ) {
     this.form = new FormGroup({
       id:new FormControl(''),
@@ -29,10 +26,6 @@ export class DialogComponent implements OnInit {
       genero: new FormControl('',Validators.required),
       especie: new FormControl('',Validators.required),
     })
-  }
-
-  ngOnInit():void {
-
   }
 
   save() {

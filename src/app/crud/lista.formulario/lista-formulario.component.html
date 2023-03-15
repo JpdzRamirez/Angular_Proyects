@@ -1,4 +1,6 @@
+<button mat-raised-button (click)="openDialog()">Pick one</button>
 <div class="content">
+
   <div fxLayout="row wrap" fxLayoutGap="16px grid">
     <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let personaje of listaFormulario">
       <mat-card class="mat-elevation-z4" >
@@ -11,34 +13,8 @@
           <p id="textInsideForm">
             Tipo de especie: {{personaje.especie}}
           </p>
-          <button mat-raised-button (click)="openDialog()">Pick one</button>
-          <br>
-          <form novalidate [formGroup]="formulario" (ngSubmit)="onSubmit(personaje.id)">
-            <input class="form-control" type="hidden" value={{personaje.id}}
-            readonly formControlName="id">
-            <label style="color:aliceblue">
-              <span>Full name</span>
-              <input
-                type="text"
-                placeholder="Ingrese el nombre"
-                formControlName="nombre">
-            </label>
-            <label style="color:aliceblue">
-                <span>Genero</span>
-                <input
-                  type="text"
-                  placeholder="Ingrese el Genero"
-                  formControlName="genero">
-              </label>
-              <label style="color:aliceblue">
-                <span>Especie</span>
-                <input
-                  type="text"
-                  placeholder="Ingrese el especie"
-                  formControlName="especie">
-              </label>
             <button type="submit" [disabled]="formulario.invalid">Modificar</button>
-          </form>
+
         </mat-card-content>
         <mat-card-actions>
           <button mat-button>Eliminar</button>
@@ -48,4 +24,3 @@
     </div>
   </div>
   </div>
-

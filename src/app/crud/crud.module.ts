@@ -24,7 +24,7 @@ const declarables = [CrudComponenteComponent];
     CommonModule,
     CrudRoutingModule,
     MaterialCdkModule,
-    ListaFormularioModule
+    ListaFormularioModule,
   ],
  providers: [
   TraerDatosService,
