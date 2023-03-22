@@ -37,7 +37,10 @@ export class ListaFormularioComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed' + result?.nombre+'-'+result?.genero+'-'
-      +result?.especie+'-'+result?.genero);
+      +result?.especie);
+      this.formulario.setValue(result?.nombre);
+      this.formulario.setValue(result?.genero);
+      this.formulario.setValue(result?.especie);
     });
   }
   onSubmit(id:string):void {

@@ -1,22 +1,31 @@
-<div mat-dialog-content>
-  <mat-label>Nombre</mat-label>
-    <mat-form-field appearance="fill">
-      <input matInput [(ngModel)]="data.nombre" placeholder="Ingrese el nombre">
-    </mat-form-field>
-
-    <mat-label>Genero</mat-label>
-  <mat-form-field appearance="fill">
-      <input matInput [(ngModel)]="data.genero" placeholder="Ingrese genero">
-  </mat-form-field>
-
-  <mat-label>Especie</mat-label>
-  <mat-form-field appearance="fill">
-      <mat-label>Especie</mat-label>
-      <input matInput [(ngModel)]="data.especie" placeholder="Ingrese especie">
-    </mat-form-field>
+<div class="container ">
+  <div class="col-md-12 text-center">
+    <ul class="list-group ">
+      <li class="list-group-item list-group-item-dark">
+        <mat-label>Nombre</mat-label>
+        <mat-form-field appearance="fill">
+          <input matInput [(ngModel)]="data.nombre" placeholder="Ingrese el nombre">
+        </mat-form-field>
+      </li>
+      <li class="list-group-item list-group-item-dark">
+        <mat-label>Genero</mat-label>
+        <mat-form-field appearance="fill">
+            <input matInput [(ngModel)]="data.genero" placeholder="Ingrese genero">
+        </mat-form-field>
+      </li>
+      <li class="list-group-item list-group-item-dark">
+        <mat-label>Especie</mat-label>
+        <mat-form-field appearance="fill">
+            <mat-label>Especie</mat-label>
+            <input matInput [(ngModel)]="data.especie" placeholder="Ingrese especie">
+          </mat-form-field></li>
+    </ul>
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="close()">Cancel</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+  <div class="container ">
+    <div class="col-md-12 text-center">
+      <button mat-button  class="btn btn-warning" [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+      <button mat-button  class="btn btn-primary" (click)="close()">Cancel</button>
+    </div>
 </div>

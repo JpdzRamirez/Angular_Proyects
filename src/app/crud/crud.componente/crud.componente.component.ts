@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { Persona } from '../../objects/persona.class';
 import { TraerDatosService } from 'src/app/servicios/traer-datos.service';
@@ -13,6 +13,10 @@ import { ModificarDatosService } from 'src/app/servicios/modificar-datos.service
 export class CrudComponenteComponent implements OnInit  {
 
   private listaDatos:Array<Persona>=[];
+
+  nombreInput:string='';
+  especieInput:string='';
+  generoInput:string='';
 
   constructor(private servicioGet:TraerDatosService,private servicioPOST:ModificarDatosService){
   }
