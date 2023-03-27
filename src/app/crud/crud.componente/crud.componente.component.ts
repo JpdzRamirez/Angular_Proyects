@@ -14,9 +14,6 @@ export class CrudComponenteComponent implements OnInit  {
 
   private listaDatos:Array<Persona>=[];
 
-  nombreInput:string='';
-  especieInput:string='';
-  generoInput:string='';
 
   constructor(private servicioGet:TraerDatosService,private servicioPOST:ModificarDatosService){
   }
@@ -46,8 +43,7 @@ export class CrudComponenteComponent implements OnInit  {
   }
 
   editItem(nuevoItem:string):void {
-    console.log(nuevoItem);
-    //this.listaDatos.push(persona);
+
   }
   clear(){
     this.listaDatos.length = 0;

@@ -1,31 +1,72 @@
-<div class="container ">
-  <div class="col-md-12 text-center">
-    <ul class="list-group ">
-      <li class="list-group-item list-group-item-dark">
-        <mat-label>Nombre</mat-label>
-        <mat-form-field appearance="fill">
-          <input matInput [(ngModel)]="data.nombre" placeholder="Ingrese el nombre">
-        </mat-form-field>
-      </li>
-      <li class="list-group-item list-group-item-dark">
-        <mat-label>Genero</mat-label>
-        <mat-form-field appearance="fill">
-            <input matInput [(ngModel)]="data.genero" placeholder="Ingrese genero">
-        </mat-form-field>
-      </li>
-      <li class="list-group-item list-group-item-dark">
-        <mat-label>Especie</mat-label>
-        <mat-form-field appearance="fill">
-            <mat-label>Especie</mat-label>
-            <input matInput [(ngModel)]="data.especie" placeholder="Ingrese especie">
-          </mat-form-field></li>
-    </ul>
-
+<div class="row justify-content-sm-center">
+  <div class="col-sm-6"  style="background-color: darkslategrey !important;
+  color: white !important;">
+    <form [formGroup]="sampleForm" (ngSubmit)="save()">
+      <div class="form-group">
+        <label>Name</label>
+          <input class="form-control" placeholder="Ingrese su nombre" type="text" formControlName="nombre"/>
+            <span class="text-danger" *ngIf="sampleForm.get('nombre')?.invalid && sampleForm.get('nombre')?.touched">
+              Ingrese el nombre
+            </span>
+      </div>
+<div class="form-group">
+    <label>Genero</label>
+      <input class="form-control" placeholder="Ingrese Genero" required formControlName="genero"/>
+          <span class="text-danger" *ngIf="sampleForm.get('genero')?.invalid && sampleForm.get('genero')?.touched">
+            Ingrese el genero
+          </span>
 </div>
-<div mat-dialog-actions>
-  <div class="container ">
-    <div class="col-md-12 text-center">
-      <button mat-button  class="btn btn-warning" [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
-      <button mat-button  class="btn btn-primary" (click)="close()">Cancel</button>
+  <div class="form-group">
+    <label>Age</label>
+      <input class="form-control" placeholder="Ingrese su Especie" type="text" formControlName="especie"/>
+        <span class="text-danger" *ngIf="sampleForm.get('especie')?.invalid && sampleForm.get('especie')?.touched">
+          Ingrese la especie
+        </span>
+  </div>
+  <div mat-dialog-actions class="form-group">
+    <div style="display: flex; margin-top: 10px;">
+      <button mat-button [mat-dialog-close]="data" cdkFocusInitial
+        type="submit" class="btn btn-primary"style="margin-left: auto; width: 30%;"
+        [disabled]="sampleForm.invalid">
+          Submit
+      </button>
+  <button mat-button  class="btn btn-primary" (click)="close()">Cancel</button>
     </div>
+  </div>
+    </form>
+  </div>
 </div>
+
+
+
+<!--<div class="container ">
+  <div class="col-md-12 text-center">
+
+      <ul class="list-group ">
+        <li class="list-group-item list-group-item-dark">
+          <mat-label>Nombre</mat-label>
+          <mat-form-field appearance="fill">
+            <input matInput [(ngModel)]="data.nombre" placeholder="Ingrese el nombre">
+          </mat-form-field>
+        </li>
+        <li class="list-group-item list-group-item-dark">
+          <mat-label>Genero</mat-label>
+          <mat-form-field appearance="fill">
+              <input matInput [(ngModel)]="data.genero" placeholder="Ingrese genero">
+          </mat-form-field>
+        </li>
+        <li class="list-group-item list-group-item-dark">
+          <mat-label>Especie</mat-label>
+          <mat-form-field appearance="fill">
+              <mat-label>Especie</mat-label>
+              <input matInput [(ngModel)]="data.especie" placeholder="Ingrese especie">
+            </mat-form-field></li>
+      </ul>
+      <div mat-dialog-actions>
+      <div class="container ">
+      <div class="col-md-12 text-center">
+        <button mat-button  class="btn btn-warning" [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+        <button mat-button  class="btn btn-primary" (click)="close()">Cancel</button>
+
+    </div>
+</div>-->
