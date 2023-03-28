@@ -2,25 +2,25 @@
 <div class="content">
 
   <div fxLayout="row wrap" fxLayoutGap="16px grid">
-    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let personaje of listaFormulario">
+    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let personaje of getListaDatos()">
       <mat-card class="mat-elevation-z4" Style="z-index: 0 !important;" >
         <mat-card-header>
           <mat-card-title-group class="d-flex justify-content-center" id="ide">
-            <p class="text-center">{{personaje.id}}</p>
+            <p class="text-center">{{personaje.getId()}}</p>
           </mat-card-title-group>
-          <mat-card-title  id="textInsideForm"> {{personaje.nombre}}</mat-card-title>
-          <mat-card-subtitle id="textInsideForm">{{personaje.genero}}</mat-card-subtitle>
+          <mat-card-title  id="textInsideForm"> {{personaje.getNombre()}}</mat-card-title>
+          <mat-card-subtitle id="textInsideForm">{{personaje.getGenero()}}</mat-card-subtitle>
         </mat-card-header>
-        <img mat-card-image src="{{personaje.image}}">
+        <img mat-card-image src="{{personaje.getImage()}}">
         <mat-card-content>
           <p id="textInsideForm" class="text-center">
-            Tipo de especie: {{personaje.especie}}
+            Tipo de especie: {{personaje.getEspecie()}}
           </p>
         </mat-card-content>
         <mat-card-actions class="d-flex justify-content-center">
           <button mat-button type="button" class="btn btn-success" (click)="openDialog()">Modificar</button>
           <button mat-button type="button" class="btn btn-danger">Eliminar</button>
-          <button mat-button type="submit" class="btn btn-warning"  *ngIf="this.getButtonVisible()" (click)="onSubmit(personaje.id)" >Enviar</button>
+          <button mat-button type="submit" class="btn btn-warning"  *ngIf="this.getButtonVisible()" (click)="onSubmit(personaje.getId())" >Enviar</button>
         </mat-card-actions>
       </mat-card>
     </div>

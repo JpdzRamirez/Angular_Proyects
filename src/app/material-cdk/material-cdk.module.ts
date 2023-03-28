@@ -14,6 +14,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
+import {MatSelectModule} from '@angular/material/select';
+
+
 
 //Dialog
 import {MatDialogModule} from '@angular/material/dialog';
@@ -22,7 +25,7 @@ import { MatInputModule } from '@angular/material/input';
 
 const components = [MatToolbarModule, MatIconModule,MatCardModule,
                     MatButtonModule,FlexLayoutModule,ReactiveFormsModule,
-                    MatDialogModule,FormsModule,MatFormFieldModule,MatInputModule,
+                    MatDialogModule,FormsModule,MatFormFieldModule,MatInputModule,MatSelectModule
                    ];
 @NgModule({
   declarations: [],

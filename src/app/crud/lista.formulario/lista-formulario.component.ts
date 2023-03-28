@@ -1,24 +1,34 @@
-import { Component, Input, EventEmitter, Output} from '@angular/core';
+import { Component, Input, EventEmitter, Output, OnInit} from '@angular/core';
 
+//FORMULARIOS
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {MatDialog,MatDialogConfig} from '@angular/material/dialog';
 
+// DIALOG FORMULARIO
 import { DialogComponent } from './dialog/dialog.component';
 
-export interface personaje {
-  nombre:string;
-  especie:string;
-  genero:string;
-}
+//OBJETO BASE MOLDE
+import { Persona } from '../../objects/persona.class';
+
+//SERVICIOS IMPORTAR DATOS DEL API
+import { TraerDatosService } from 'src/app/servicios/traer-datos.service';
+import { ModificarDatosService } from 'src/app/servicios/modificar-datos.service';
+
+
 @Component({
   selector: 'app-lista-formulario',
   templateUrl: './lista-formulario.component.html',
   styleUrls: ['./lista-formulario.component.scss']
 })
-export class ListaFormularioComponent {
+export class ListaFormularioComponent implements OnInit {
 
-  @Input() listaFormulario: any={};
+  // BINDINGS
+  //@Input() listaFormulario: any={};
   @Output() newItemEvent = new EventEmitter<string>();
+
+
+  // VARIABLES
+  private listaDatos:Array<Persona>=[];
 
   private isButtonVisible:boolean=false;
 
@@ -26,9 +36,50 @@ export class ListaFormularioComponent {
 
   public formulario:FormGroup;
 
-  public setButtonVisible(state:boolean):void {
-  this.isButtonVisible=state;
+  // CONSTRUCTOR
+  constructor(public dialog: MatDialog,private servicioGet:TraerDatosService,private servicioPOST:ModificarDatosService ) {
+    this.formulario=new FormGroup({
+      nombre:new FormControl('',[Validators.required, Validators.minLength(5),],),
+      genero:new FormControl('',[Validators.required, Validators.minLength(5),]),
+      especie:new FormControl('',[Validators.required, Validators.minLength(5),])
+    })
+    //
   }
+  // setting data from api in list
+  ngOnInit(){
+    this.servicioGet.getUsers().subscribe(resp=>{
+      this.setListaDatos(resp.results);
+      });
+
+  }
+
+
+  // SETTERS
+  public setButtonVisible(state:boolean):void {
+    this.isButtonVisible=state;
+  }
+
+  setListaDatos(lista:any){
+    console.log(lista);
+    for(var i=0; i<lista.length; i++){
+      let personaTemp:Persona =new Persona();
+      personaTemp.setId(lista[i].id);
+      personaTemp.setNombre(lista[i].name);
+      personaTemp.setImage(lista[i].image);
+      personaTemp.setGenero(lista[i].gender);
+      personaTemp.setEspecie(lista[i].species);
+      this.listaDatos.push(personaTemp);
+    }
+  }
+
+  editItem(nuevoItem:string):void {
+
+  }
+  clear(){
+    this.listaDatos.length = 0;
+  }
+
+  //GETTERS FROM FORM CONTROL
   public getButtonVisible():boolean{
     return this.isButtonVisible;
   }
@@ -41,63 +92,68 @@ export class ListaFormularioComponent {
   public getGenero() {
     return this.formulario.controls['genero'].value;
   }
-  constructor(public dialog: MatDialog ) {
-    this.formulario=new FormGroup({
-      nombre:new FormControl('',[Validators.required, Validators.minLength(5),],),
-      genero:new FormControl('',[Validators.required, Validators.minLength(5),]),
-      especie:new FormControl('',[Validators.required, Validators.minLength(5),])
-    })
-    //
+
+  public getListaDatos():Array<Persona> {
+    return this.listaDatos;
   }
+
+  // DIALOG
   openDialog(): void {
 
     const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    /*dialogConfig.position = {
-      'top': '50%',
-      left: '',
-    };*/
-    dialogConfig.panelClass = "custom-dialog-container";
-    dialogConfig.minWidth="50%"
-    dialogConfig.data = {
-      data:this.personaje,
-    }
+          //CONFIG DIALOG
+          dialogConfig.disableClose = true;
+          dialogConfig.autoFocus = true;
+          /*dialogConfig.position = {
+            'top': '50%',
+            left: '',
+          };*/
+          dialogConfig.panelClass = "custom-dialog-container";
+          dialogConfig.minWidth="50%"
+          dialogConfig.data = {
+            data:this.personaje,
+          }
 
-
+    // LLAMADO AL DIALOGO
     const dialogRef = this.dialog.open(DialogComponent,dialogConfig);
 
+    // CLOSE DIALOG
     dialogRef.afterClosed().subscribe(result => {
+      /*
+          TESTING
       console.log('The dialog was closed' + result?.nombre+'-'+result?.genero+'-'
-      +result?.especie);
-      this.formulario.setValue({
-        nombre:result?.nombre,
-        genero:result?.genero,
-        especie:result?.especie
-      });
+      +result?.especie);*/
+      //Seteamos el formulario de validación
+          this.formulario.setValue({
+            nombre:result?.nombre,
+            genero:result?.genero,
+            especie:result?.especie
+          });
+        // TESTING
       console.log(this.formulario.value);
-      if(this.formulario.contains(result)) {
-        this.setButtonVisible(true);
-      }
+          // ENABLE SUBMINT BUTTON
+          if(this.formulario.contains(result)) {
+            this.setButtonVisible(true);
+          }
 
     });
 
   }
-  onSubmit(id:number):void {
+
+  // ENVIAR INFORMACIóN AL BACKEND
+  onSubmit(id:any):void {
 
     //console.log(this.listaFormulario[id-1].nombre);
     //this.newItemEvent.emit(this.formulario.value);
     //console.log(this.formulario.value);
+        console.log('id:'+id);
 
-    console.log('id:'+id);
+        console.log(this.getNombre());
 
-    console.log(this.getNombre());
-
-    this.listaFormulario[id-1].nombre=this.getNombre();
-    this.listaFormulario[id-1].genero=this.getGenero();
-    this.listaFormulario[id-1].especie=this.getEspecie();
-
+        this.listaDatos[id-1].setNombre(this.getNombre());
+        this.listaDatos[id-1].setEspecie(this.getEspecie());
+        this.listaDatos[id-1].setGenero(this.getGenero());
   }
 }
 

@@ -1,0 +1,43 @@
+.bodyLogin{
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: rgba(134, 134, 134, 0.671);
+
+}
+
+.login{
+  width: 100%;
+  max-width: 330px;
+  text-align: center;
+  h1{
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    color:rgb(0, 0, 0);
+  }
+
+
+  mat-form-field {
+    margin-left: 8px;
+    width: 250px;
+    color: rgb(0, 0, 0);
+    input{
+      color:black;
+    }
+  }
+
+  .example-right-align {
+    text-align: right;
+  }
+
+  input.example-right-align::-webkit-outer-spin-button,
+  input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+
+  }
+
+
+}
+
+
