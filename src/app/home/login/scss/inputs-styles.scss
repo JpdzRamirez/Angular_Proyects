@@ -1,0 +1,40 @@
+mat-form-field {
+  border-color: #fff;
+  margin-left: 8px;
+  width: 250px;
+  color: rgb(255, 255, 255);
+
+  mat-form-field:active{
+    height: 50px;
+    transition: height ease-in-out 400ms;
+    background-color: aquamarine;
+  }
+  input{
+    color:rgb(255, 255, 255);
+  }
+  input::active {
+    height: 20px;
+    transition: height ease-in-out 400ms;
+    border-color: aquamarine !important;
+}
+
+  mat-icon{
+    width: 40px;
+  }
+  mat-label{
+    color: rgb(255, 255, 255);
+  }
+
+}
+
+.example-right-align {
+  text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+
+}
+
+

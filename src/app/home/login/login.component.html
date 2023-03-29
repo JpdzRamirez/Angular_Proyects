@@ -1,22 +1,23 @@
 <div class="bodyLogin">
   <div class="login">
-    <img src="../../../assets/usuario.png" style="width: 50%;">
+    <img src="../../../assets/candado.png" style="width: 50%;">
     <h1>Login</h1>
-
       <mat-form-field appearance="outline">
         <mat-label placeholder="usuario" >Usuario</mat-label>
-        <input  matInput>
-        <mat-hint>Hint</mat-hint>
+        <input  matInput >
       </mat-form-field>
 
       <mat-form-field class="ancho" appearance="outline">
         <mat-label>Ingrese su contraseña</mat-label>
         <input matInput [type]="hide ? 'password' : 'text'">
-        <button mat-icon-button matSuffix (click)="hide =! hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <span mat-icon-button matSuffix (click)="hide =! hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon >{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-        <mat-hint>Hint</mat-hint>
+        </span>
       </mat-form-field>
+      <div class="buttonsLogin">
+        <button  style="--clr:#03C4A1" id="LogIn"><span>Iniciar Sesión</span><i></i></button>
+        <button style="--clr:#03C4A1" id="SingUp"><span>Registrarse</span><i></i></button>
+      </div>
 
   </div>
 </div>
