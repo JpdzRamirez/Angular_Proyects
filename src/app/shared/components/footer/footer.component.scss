@@ -3,6 +3,14 @@
   position:fixed;
   width: 100%;
   .toolbar {
+
+    #foot{
+      align-items: flex-start;
+      height: 13vh;
+    }
+    background: aquamarine;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
     &__text {
       text-align: center;
       width: 100%;

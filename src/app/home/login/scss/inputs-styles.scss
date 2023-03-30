@@ -1,40 +1,100 @@
-mat-form-field {
-  border-color: #fff;
-  margin-left: 8px;
-  width: 250px;
-  color: rgb(255, 255, 255);
 
-  mat-form-field:active{
-    height: 50px;
-    transition: height ease-in-out 400ms;
-    background-color: aquamarine;
+
+.inputsP{
+  .input {
+    mat-icon::passIcon{
+      width: 24px;
+
+    }
+
+    // needs to be relative so the :focus span is positioned correctly
+    position:relative;
+
+    // bigger font size for demo purposes
+    font-size: 1.5em;
+
+    // the border gradient
+    background: linear-gradient(21deg, #63c9ff, #1beabd);
+
+    // the width of the input border
+    padding: 3px;
+
+    // we want inline fields by default
+    display: inline;
+
+    // we want rounded corners no matter the size of the field
+    border-radius: 9999em;
+
+    // style of the actual input field
+    *:not(span) {
+      position: relative;
+      display: inherit;
+      border-radius: inherit;
+      margin: 0;
+      border: none;
+      outline: none;
+      padding: 0 .325em;
+      z-index: 1; // needs to be above the :focus span
+
+      // summon fancy shadow styles when focussed
+      &:focus + span {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    // we don't animate box-shadow directly as that can't be done on the GPU, only animate opacity and transform for high performance animations.
+    span {
+
+      transform: scale(.993, .94); // scale it down just a little bit
+      transition: transform .5s, opacity .25s;
+      opacity: 0; // is hidden by default
+
+      position:absolute;
+      z-index: 0; // needs to be below the field (would block input otherwise)
+      margin:4px; // a bit bigger than .input padding, this prevents background color pixels shining through
+      left:0;
+      top:0;
+      right:0;
+      bottom:0;
+      border-radius: inherit;
+      pointer-events: none; // this allows the user to click through this element, as the shadow is rather wide it might overlap with other fields and we don't want to block those.
+
+      // fancy shadow styles
+      box-shadow: inset 0 0 0 0px #fff,
+        0 0 0 0px #fff,
+        3px -3px 30px #1beabd,
+        -3px 3px 30px #10abff;
+    }
+
   }
-  input{
-    color:rgb(255, 255, 255);
-  }
-  input::active {
-    height: 20px;
-    transition: height ease-in-out 400ms;
-    border-color: aquamarine !important;
-}
 
-  mat-icon{
-    width: 40px;
-  }
-  mat-label{
-    color: rgb(255, 255, 255);
+  html {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    line-height:1.5;
+    font-size:1em;
   }
 
+  body {
+    text-align: center;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  html, body {
+    height:100%;
+  }
+
+  input {
+    font-family: inherit;
+    line-height:inherit;
+    color:#2e3750;
+    min-width:5em;
+  }
+
+  ::placeholder {
+    color:#232424;
+  }
+
 }
-
-.example-right-align {
-  text-align: right;
-}
-
-input.example-right-align::-webkit-outer-spin-button,
-input.example-right-align::-webkit-inner-spin-button {
-  display: none;
-
-}
-
-

@@ -2,22 +2,31 @@
   <div class="login">
     <img src="../../../assets/candado.png" style="width: 50%;">
     <h1>Login</h1>
-      <mat-form-field appearance="outline">
-        <mat-label placeholder="usuario" >Usuario</mat-label>
-        <input  matInput >
-      </mat-form-field>
 
-      <mat-form-field class="ancho" appearance="outline">
-        <mat-label>Ingrese su contraseña</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'">
-        <span mat-icon-button matSuffix (click)="hide =! hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-          <mat-icon >{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </span>
-      </mat-form-field>
+    <form [formGroup]="form" (ngSubmit)="ingresar()">
+      <div class="inputsP">
+        <p>
+          <span class="input">
+            <input formControlName="usuario" type="text" placeholder="Usuario">
+            <span></span>
+          </span>
+        </p>
+
+        <p>
+          <span class="input">
+            <input formControlName="contraseña" matInput [type]="hide ? 'password' : 'text'" placeholder="Contraseña">
+            <span></span>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </span>
+        </p>
+      </div>
       <div class="buttonsLogin">
-        <button  style="--clr:#03C4A1" id="LogIn"><span>Iniciar Sesión</span><i></i></button>
-        <button style="--clr:#03C4A1" id="SingUp"><span>Registrarse</span><i></i></button>
+        <button type="submit" style="--clr:#03C4A1" ><span>Iniciar Sesión</span><i></i></button>
+        <button style="--clr:#03C4A1" ><span>Registrarse</span><i></i></button>
       </div>
 
+    </form>
   </div>
 </div>

@@ -1,4 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder,FormGroup, Validators } from '@angular/forms';
+
 
 
 @Component({
@@ -6,12 +8,23 @@ import { Component, ViewChild } from '@angular/core';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
 
   public hide = true;
 
+  form:FormGroup;
+
   private isButtonVisible:boolean=false;
 
+  ngOnInit():void{
+
+  }
+  constructor(private fb:FormBuilder){
+    this.form = this.fb.group({
+        usuario:['',Validators.required],
+        contraseña:['',Validators.required]
+    });
+    };
   //@ViewChild('el') span:ElementRef;
 
 
@@ -27,7 +40,9 @@ export class LoginComponent {
     //this.span.nativeElement.setAttribute('highlight', '');
   }
 
-
+    ingresar(){
+      console.log(this.form.value);
+    }
 
       public OnChangeButtonVisible(value:boolean){
         if(value==true){
