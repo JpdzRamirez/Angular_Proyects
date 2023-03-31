@@ -3,30 +3,53 @@
     <img src="../../../assets/candado.png" style="width: 50%;">
     <h1>Login</h1>
 
-    <form [formGroup]="form" (ngSubmit)="ingresar()">
+    <form novalidate [formGroup]="form" (ngSubmit)="ingresar()">
       <div class="inputsP">
-        <p>
-          <span class="input">
-            <input formControlName="usuario" type="text" placeholder="Usuario">
-            <span></span>
-          </span>
-        </p>
+          <p>
+            <span class="input">
+              <input #user  required formControlName="user" type="text"
+              placeholder="Usuario"
+              onfocus="this.placeholder=''"
+              onblur="this.placeholder='Ingrese Usuario'">
+              <span class="text-danger moving" *ngIf="this.form.get('user')?.errors?.['required']">
+                (El nombre no puede quedar vacío)
+              </span>
+              <span  class="text-warning" *ngIf="this.form.get('user')?.errors?.['minlength']">
+                (Debe tener como mínimo 10 caracteres)
+              </span>
+              <span></span>
+            </span>
+
+          </p>
 
         <p>
           <span class="input">
-            <input formControlName="contraseña" matInput [type]="hide ? 'password' : 'text'" placeholder="Contraseña">
+            <input #password (focus)="setColor()"   required formControlName="password"
+            matInput [type]="hide ? 'password' : 'text'"
+            placeholder="Ingrese Contraseña"
+            onfocus="this.placeholder=''"
+            onblur="this.placeholder='Ingrese Contraseña'" type="password" autocomplete="on" >
+            <span class="text-danger" *ngIf="this.form.get('password')?.errors?.['required']">
+              (La contraseña no es válida)
+            </span>
             <span></span>
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <mat-icon style="height: auto; width: auto; translate: -4px; top: 3px;">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
+            </a>
           </span>
+
         </p>
       </div>
       <div class="buttonsLogin">
-        <button type="submit" style="--clr:#03C4A1" ><span>Iniciar Sesión</span><i></i></button>
-        <button style="--clr:#03C4A1" ><span>Registrarse</span><i></i></button>
+        <button type="submit"  [disabled]="form.invalid" style="--clr:#03C4A1" ><span>Iniciar Sesión</span><i></i></button>
+        <button type="button" style="--clr:#03C4A1" ><span>Registrarse</span><i></i></button>
       </div>
-
+      <p>
+        Real-time data: {{ form.value | json }}
+      </p>
+      <p>
+        Your form status is : {{ form.status }}
+      </p>
     </form>
   </div>
 </div>

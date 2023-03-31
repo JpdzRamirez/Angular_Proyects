@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder,FormGroup, Validators } from '@angular/forms';
-
+import { Component, ElementRef,
+   OnInit, ViewChild,AfterViewInit,AfterContentInit, Renderer2 } from '@angular/core';
+import { FormBuilder,FormControl,FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -8,26 +8,43 @@ import { FormBuilder,FormGroup, Validators } from '@angular/forms';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit,AfterViewInit,AfterContentInit{
+
+  @ViewChild('user', {static: false})userInput:ElementRef<HTMLInputElement> = {} as ElementRef;
+  @ViewChild('password', {static: false})passwordInput:ElementRef<HTMLInputElement> = {} as ElementRef;
 
   public hide = true;
-
-  form:FormGroup;
-
+  public form;
   private isButtonVisible:boolean=false;
 
-  ngOnInit():void{
 
-  }
-  constructor(private fb:FormBuilder){
-    this.form = this.fb.group({
-        usuario:['',Validators.required],
-        contraseña:['',Validators.required]
+  constructor(private renderer2:Renderer2,private fb:FormBuilder){
+   this.form  = this.fb.group({
+        user:['',[Validators.required, Validators.minLength(6)]],
+        password:['',[Validators.required,Validators.minLength(6)]]
     });
-    };
-  //@ViewChild('el') span:ElementRef;
+    }
 
+      //close spinner
+      ngAfterContentInit(): void {
+      }
+      //open spinner
+      ngOnInit(){
+      }
 
+      ngAfterViewInit() {
+      }
+
+     //child functions
+
+    public setColor(){
+      //console.log(this.userInput.nativeElement);
+      const asUserElement=this.userInput.nativeElement;
+      const asPasswordElement=this.passwordInput.nativeElement;
+      //this.renderer2.setStyle(asUserelement,'color', 'red');
+      this.renderer2.addClass(asUserElement,'movible');
+      this.renderer2.addClass(asPasswordElement,'movible');
+    }
   //Getters
   public getButtonVisible():boolean {
     return this.isButtonVisible;
@@ -36,20 +53,25 @@ export class LoginComponent implements OnInit{
       this.isButtonVisible=status;
   }
 
-  ngAfterViewInit(){
-    //this.span.nativeElement.setAttribute('highlight', '');
-  }
+
 
     ingresar(){
-      console.log(this.form.value);
+      if (this.form.valid){
+        console.log("Todos los datos son válidos");
+        console.log(this.form.value);
+      }
+    else{
+      console.log("Hay datos inválidos en el formulario");
     }
 
-      public OnChangeButtonVisible(value:boolean){
-        if(value==true){
-          this.setButtonVisibleStatus(false);
-        }
-        else{
-          this.setButtonVisibleStatus(true);
-        }
-      }
+
+  }
+
+    }
+
+
+
+function passwordMatchValidator(g: FormGroup) {
+  //return g.get('contraseña').value === g.get('contraseña').value
+     //? null : {'mismatch': true};
 }
