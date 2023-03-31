@@ -17,7 +17,7 @@
             <input formControlName="contraseña" matInput [type]="hide ? 'password' : 'text'" placeholder="Contraseña">
             <span></span>
             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              <mat-icon style="height: auto; width: auto; translate: -4px; top: 3px;">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
           </span>
         </p>
