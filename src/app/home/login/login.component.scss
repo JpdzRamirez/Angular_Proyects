@@ -2,6 +2,8 @@
 @import './scss/inputs-styles.scss';
 @import './scss/background-styles.scss';
 
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
 .bodyLogin{
   display: flex;
   flex-direction: column;
@@ -17,7 +19,8 @@
   max-width: 450px;
   text-align: center;
   h1{
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.6em;
     color:rgb(255, 255, 255);
     }
   }

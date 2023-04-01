@@ -11,13 +11,14 @@
               placeholder="Usuario"
               onfocus="this.placeholder=''"
               onblur="this.placeholder='Ingrese Usuario'">
-              <span class="text-danger moving" *ngIf="this.form.get('user')?.errors?.['required']">
-                (El nombre no puede quedar vacío)
+              <span *ngIf="this.form.get('user')?.errors?.['required']">
+                <p class="alert"> El nombre no puede quedar vacío</p>
+
               </span>
-              <span  class="text-warning" *ngIf="this.form.get('user')?.errors?.['minlength']">
-                (Debe tener como mínimo 10 caracteres)
+              <span  class="alert" *ngIf="this.form.get('user')?.errors?.['minlength']">
+                Debe tener como mínimo 6 caracteres
               </span>
-              <span></span>
+              <span class="neon"></span>
             </span>
 
           </p>
