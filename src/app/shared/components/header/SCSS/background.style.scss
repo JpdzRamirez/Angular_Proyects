@@ -1,6 +1,6 @@
 .header{
   .toolbar {
-    border-radius: 25px;
+    border-radius: 5px;
     height: fit-content;
     display: inline-flex;
     background-color: rgba(0, 0, 0, .4);
@@ -27,14 +27,15 @@
         height:100%;
         width: 100%;
         z-index:-1;
+        translate: 8px;
         transition: .2s;
         border-radius: 25px;
       }
         &:hover {
           &::before {
-            background: linear-gradient(to bottom, #b1b1b1, #ffffff);
-              box-shadow: 0px 3px 20px 0px black;
-              transform: scale(1.2);
+            background-color: #2AF598;
+              box-shadow: 0px 10px 10px 0px black;
+              transform: scale(0.8);
           }
           color: black;
       }

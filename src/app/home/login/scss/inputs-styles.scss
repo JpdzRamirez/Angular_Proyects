@@ -3,94 +3,67 @@
 .bodyLogin{
 .login{
       .movible:focus{
-        color:#000000 !important;
-      }
-      .mobile:focus:placeholder{
-        //transform: translate(-3px, -90px);
-      }
-  .inputsP{
-    .input {
-      mat-icon{
-        width: 24px;
+        color:#3bfc00 ;
+        text-align: left !important;
       }
 
-      // needs to be relative so the :focus span is positioned correctly
-      position:relative;
+  .inputsDiv{
+    .inputSpan{
+      p {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: nowrap;
+        .neon{
+          position:relative;
+              // the border gradient
+              background: linear-gradient(21deg, #10abff, #1beabd);
 
-      // bigger font size for demo purposes
-      font-size: 1.5em;
+              // the width of the input border
+              padding: 3px;
 
-      // the border gradien
+              // we want inline fields by default
+              display: inline-block;
 
-      // the width of the input border
-      padding: 3px;
+              // we want rounded corners no matter the size of the field
+              border-radius: 50px;
+              // style of the actual input field
 
-      // we want inline fields by default
-      display: inline;
-
-      // we want rounded corners no matter the size of the field
-      border-radius: 9999em;
-
-      // style of the actual input field
-
-      *:not(.neon) {
-        position: relative;
-        display: inherit;
-        border-radius: inherit;
-        margin: 0;
-        border: none;
-        outline: none;
-        padding: 0 .325em;
-        z-index: 1; // needs to be above the :focus span
-
-        // summon fancy shadow styles when focussed
-
-        &:focus + .neon {
-          opacity: 1;
-          transform: scale(1);
+          &:hover {
+                background:#f5f5f5 ;
+                      -webkit-animation: shadow-drop-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+                      animation: shadow-drop-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+          }
+               // needs to be relative so the :focus span is positioned correctly
+              input{
+                &::placeholder{
+                  color: gray;
+                }
+                text-align: center;                font-size: 1.7em;
+                border-radius: 24px;
+                border-width: 0px;
+                background:whitesmoke ;
+                &:focus{
+                  outline: none;
+                }
+              }
+          a {
+            translate: 4px !important;
+            padding: 1px !important;
+            display: inline !important;
+            bottom: -3px !important;
+          }
         }
-      }
-
-      // we don't animate box-shadow directly as that can't be done on the GPU, only animate opacity and transform for high performance animations.
-      &:focus + span {
-
-        p {
-          opacity: 1;
-          transform: translate(89px, 0px);
-          background: #e20707f6 !important;
-        }
-
-
-        .neon {
-
-          transform: scale(.993, .94); // scale it down just a little bit
-          transition: transform .5s, opacity .25s;
-          opacity: 0; // is hidden by default
-
-          position:absolute;
-          z-index: 2; // needs to be below the field (would block input otherwise)
-          margin:4px; // a bit bigger than .input padding, this prevents background color pixels shining through
-          left:0;
-          top:0;
-          right:0;
-          bottom:0;
-          border-radius: inherit;
-          pointer-events: none; // this allows the user to click through this element, as the shadow is rather wide it might overlap with other fields and we don't want to block those.
-          background: linear-gradient(21deg, #08AEEA, #2AF598);
-          // fancy shadow styles
-          box-shadow: inset 0 0 0 0px #fff,
-            0 0 0 0px #fff,
-            3px -3px 30px #1beabd,
-            -3px 3px 30px #10abff;
-        }
-      }
+      } // P
+      .validationDiv{
 
       }
-    }
+    } //INPUT span
 
-  }
+  }// input div
 
 }
 
 
 
+}

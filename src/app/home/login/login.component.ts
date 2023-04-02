@@ -37,13 +37,14 @@ export class LoginComponent implements OnInit,AfterViewInit,AfterContentInit{
 
      //child functions
 
-    public setColor(){
+    public activateFields(){
       //console.log(this.userInput.nativeElement);
       const asUserElement=this.userInput.nativeElement;
       const asPasswordElement=this.passwordInput.nativeElement;
       //this.renderer2.setStyle(asUserelement,'color', 'red');
       this.renderer2.addClass(asUserElement,'movible');
       this.renderer2.addClass(asPasswordElement,'movible');
+      this.renderer2.removeAttribute(asPasswordElement,'hidden');
     }
   //Getters
   public getButtonVisible():boolean {

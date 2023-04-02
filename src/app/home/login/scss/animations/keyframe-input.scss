@@ -2,13 +2,27 @@
 
 .bodyLogin{
   .login{
+    .inputsDiv + .inputSpan{
+      .neon{
 
-    .inputsP{
-        /**
- * ----------------------------------------
- * animation slide-top
- * ----------------------------------------
- */
+        @keyframes shadow-drop-center {
+          0% {
+            -webkit-box-shadow: 0 0 0 0 rgb(27, 234, 189,.79);
+            box-shadow: inset 0 0 0 3px #ffffff00,
+            0 0 0 1px #f5f5f5,
+            3px -3px 30px #1beabd,
+            -3px 3px 30px #10abff;
+          }
+          100% {
+            -webkit-box-shadow: 0 0 30px 0px rgb(27, 234, 189,.79);
+                    box-shadow: inset 0 0 0 3px #ffffff00,
+                    0 0 0 1px #f5f5f5,
+                    3px -3px 30px #1beabd,
+                    -3px 3px 30px #10abff;
+
+          }
+        }
+ }
 @-webkit-keyframes slide-top {
   0% {
     -webkit-transform: translateY(0);
