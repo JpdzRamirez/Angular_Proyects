@@ -1,51 +1,5 @@
 
-@import './SCSS/background.style.scss';
-
 .header{
-  .toolbar {
-    height: 10vh;
-	margin: 0;
-	display: flex;
-	justify-content: center;
+  display: none;
 
-
-    flex-direction: column;
-    margin-top: auto;
-    background: linear-gradient(to bottom, #b1b1b1, #ffffff);
-
-    border-radius: 2.5px;
-    color:rgba(14, 13, 13, 0.877);
-  font-family:Arial, Helvetica, sans-serif;
-    display: flex;
-    &__spacer {
-      flex: 1 1 auto;
-    }
-    &__menu {
-      margin: 0 auto;
-      list-style:none;
-      ul {
-        display: flex;
-        list-style:none;
-      }
-      &__icon{
-        border:0;
-        background-color: transparent;
-        color: rgb(255, 255, 255);
-        vertical-align: middle;
-      }
-      &__text {
-        color: rgb(255, 255, 255);
-        text-decoration: none;
-        vertical-align: middle;
-      }
-    }
-    &__text {
-      color: rgb(255, 255, 255);
-      text-decoration: none;
-      vertical-align: middle;
-      &.active {
-        text-decoration: underline ;
-      }
-    }
-  }
 }
