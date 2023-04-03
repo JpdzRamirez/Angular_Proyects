@@ -38,7 +38,7 @@
             <div class="inputSpan">
               <p>
               <span class="neon">
-            <input  (focus)="activateFields()"   required formControlName="password"
+            <input  (keyup)="activateFields()"   required formControlName="password"
             matInput [type]="hide ? 'password' : 'text'"
             placeholder="Ingrese Contraseña"
             onfocus="this.placeholder=''"
@@ -46,12 +46,13 @@
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             title="Debe contener al menos un número y una letra mayúscula y minúscula, y al menos
             menos 8 o más caracteres">
+
             <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </a>
               </span>
             </p>
-              <div #password class="validationDiv" >
+              <div #passwordValidation class="validationDiv"  hidden>
                 <h3>Password must contain the following:</h3>
                 <p id="letter" class="wrong">A <b>lowercase</b> letter</p>
                 <p id="capital" class="wrong">A <b>capital (uppercase)</b>letter</p>

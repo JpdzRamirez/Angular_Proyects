@@ -1,4 +1,4 @@
-import { Component, ElementRef,
+import { Component, ElementRef,Input,
    OnInit, ViewChild,AfterViewInit,AfterContentInit, Renderer2 } from '@angular/core';
 import { FormBuilder,FormControl,FormGroup, Validators } from '@angular/forms';
 
@@ -11,7 +11,9 @@ import { FormBuilder,FormControl,FormGroup, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit,AfterViewInit,AfterContentInit{
 
   @ViewChild('user', {static: false})userInput:ElementRef<HTMLInputElement> = {} as ElementRef;
-  @ViewChild('password', {static: false})passwordInput:ElementRef<HTMLInputElement> = {} as ElementRef;
+  @ViewChild('passwordValidation', {static: false})passwordInput:ElementRef<HTMLInputElement> = {} as ElementRef;
+
+  @Input() passwordText:string;
 
   public hide = true;
   public form;
@@ -23,6 +25,7 @@ export class LoginComponent implements OnInit,AfterViewInit,AfterContentInit{
         user:['',[Validators.required, Validators.minLength(6)]],
         password:['',[Validators.required,Validators.minLength(6)]]
     });
+    this.passwordText='';
     }
 
       //close spinner
@@ -44,8 +47,17 @@ export class LoginComponent implements OnInit,AfterViewInit,AfterContentInit{
       //this.renderer2.setStyle(asUserelement,'color', 'red');
       this.renderer2.addClass(asUserElement,'movible');
       this.renderer2.addClass(asPasswordElement,'movible');
-      this.renderer2.removeAttribute(asPasswordElement,'hidden');
+
+      if(this.form.controls['password'].value!=""){
+        this.renderer2.removeAttribute(asPasswordElement,'hidden');
+      }else{
+        asPasswordElement.setAttribute('hidden', 'true');
+      }
+      //console.log(this.form.controls['password'].value);
+
+
     }
+
   //Getters
   public getButtonVisible():boolean {
     return this.isButtonVisible;
