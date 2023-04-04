@@ -54,7 +54,14 @@ export class LoginComponent implements OnInit,AfterViewInit,AfterContentInit{
 
       ngAfterViewInit() {
       }
+      updateNameClasses(parametro:any):any{
+        return{
+          '':parametro.length==0,
+          'validationDiv_exit':parametro.length ==2,
+          'validationDiv_enabled':parametro.length >2
+        }
 
+      }
      //child functions
 
     public activateFields(){
@@ -63,8 +70,8 @@ export class LoginComponent implements OnInit,AfterViewInit,AfterContentInit{
       const asPasswordElement=this.passwordInput.nativeElement;
 
       //Practice excercise for render2
-      this.renderer2.addClass(asUserElement,'movible');
-      this.renderer2.addClass(asPasswordElement,'movible');
+     // this.renderer2.addClass(asUserElement,'movible');
+      //this.renderer2.addClass(asPasswordElement,'movible');
       //this.renderer2.setStyle(asUserelement,'color', 'red');
 
       const asLenghtElement=this.lengthInput.nativeElement;
@@ -79,8 +86,9 @@ export class LoginComponent implements OnInit,AfterViewInit,AfterContentInit{
       //Sí existen registros en password inputfield
       if(this.form.controls['password'].value!=""){
               //Mostramos el contenido
-              this.renderer2.removeAttribute(asPasswordElement,'hidden');
-
+              //this.renderer2.removeAttribute(asPasswordElement,'hidden');
+              //this.renderer2.removeClass(asPasswordElement,'validationDiv_enabled');
+              //this.renderer2.addClass(asPasswordElement,'validationDiv_enabled');
               //validamos longitud >6 ok , <6 not ok
               if(tempPivote.length>=6){
                 this.renderer2.removeClass(asLenghtElement,'notValid');
@@ -93,8 +101,9 @@ export class LoginComponent implements OnInit,AfterViewInit,AfterContentInit{
 
 
       }else{
-        asPasswordElement.setAttribute('hidden', 'true');
-
+       // this.renderer2.removeClass(asPasswordElement,'validationDiv_enabled');
+        //this.renderer2.addClass(asPasswordElement,'validationDiv_exit');
+        //this.renderer2.setAttribute(asPasswordElement,'hidden','true');
       }
       //console.log(this.form.controls['password'].value);
 

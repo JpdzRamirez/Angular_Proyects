@@ -37,7 +37,7 @@
     <img src="../../../assets/candado.png" style="width: 50%;">
     <h1>Login</h1>
 
-    <form novalidate [formGroup]="form" (ngSubmit)="ingresar()">
+    <form  novalidate [formGroup]="form" (ngSubmit)="ingresar()">
       <div class="inputsDiv">
 
             <div class="inputSpan">
@@ -72,7 +72,7 @@
             <div class="inputSpan">
               <p>
               <span class="neon">
-            <input  (keyup)="activateFields()"   required formControlName="password"
+            <input #inputComponent (keyup)="activateFields()"   required formControlName="password"
             matInput [type]="hide ? 'password' : 'text'"
             placeholder="Ingrese Contraseña"
             onfocus="this.placeholder=''"
@@ -86,14 +86,14 @@
             </a>
               </span>
             </p>
-              <div #passwordValidation class="validationDiv"  hidden>
+              <div #passwordValidation [hidden]="inputComponent.value.length == 0"
+                [ngClass]="updateNameClasses(inputComponent.value)"
+              >
                 <h3>Password must contain the following:</h3>
-                <ul>
-                  <li class="notValid"><p #length ><b>Debe tener</b>al menos 6 caracteres</p></li>
-                  <li><span #letter class="notValid"><b>Debe tener</b> letra minuscula</span></li>
-                  <li> <span #capital class="notValid"><b>Debe tener </b>letra mayuscula</span></li>
-                  <li><span #number3 class="notValid"><b>Debe tener</b> un numero</span></li>
-                </ul>
+                <span #length class="notValid"><b>Debe tener</b> al menos 6 caracteres</span>
+                <span #letter class="notValid"><b>Debe tener</b> letra minuscula</span>
+                <span #capital class="notValid"><b>Debe tener </b>letra mayuscula</span>
+                <span #number3 class="notValid"><b>Debe tener</b> un numero</span>
 
                 <label class="text-danger" *ngIf="this.form.get('password')?.errors?.['required']">
                   Ingrese contraseña de 6 dígitos
