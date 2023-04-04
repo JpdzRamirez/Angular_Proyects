@@ -43,15 +43,15 @@
             <div class="inputSpan">
               <p>
               <span class="neon">
-              <input #user (focus)="activateFields()" required formControlName="user" type="text"
+              <input #inputUser (keyup)="onChangesUserField()" required formControlName="user" type="text"
               placeholder="Usuario"
               onfocus="this.placeholder=''"
               onblur="this.placeholder='Ingrese Usuario'">
               </span>
             </p>
-              <div class="validationDiv">
+              <div #userValidation [ngClass]="updateClassUserField(inputUser.value)" class="" hidden>
                 <label  *ngIf="this.form.get('user')?.errors?.['required']">
-                  Imgrese Usuario
+                  Ingrese Usuario
                 </label>
                 <ng-container *ngIf="this.form.get('user')?.errors?.['minlength']; then loggedIn; else loggedOut">
                 </ng-container>
@@ -72,31 +72,32 @@
             <div class="inputSpan">
               <p>
               <span class="neon">
-            <input #inputComponent (keyup)="activateFields()"   required formControlName="password"
+            <input #inputPassword (keyup)="onChangesPasswordField()" required formControlName="password"
             matInput [type]="hide ? 'password' : 'text'"
             placeholder="Ingrese Contraseña"
             onfocus="this.placeholder=''"
             onblur="this.placeholder='Ingrese Contraseña'" type="password" autocomplete="on"
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-            title="Debe contener al menos un número y una letra mayúscula y minúscula, y al menos
-            menos 8 o más caracteres">
+            >
 
             <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </a>
               </span>
             </p>
-              <div #passwordValidation [hidden]="inputComponent.value.length == 0"
-                [ngClass]="updateNameClasses(inputComponent.value)"
+              <div #passwordValidation class="" hidden
+                [ngClass]="updateClassPasswordField(inputPassword.value)"
               >
-                <h3>Password must contain the following:</h3>
-                <span #length class="notValid"><b>Debe tener</b> al menos 6 caracteres</span>
-                <span #letter class="notValid"><b>Debe tener</b> letra minuscula</span>
-                <span #capital class="notValid"><b>Debe tener </b>letra mayuscula</span>
-                <span #number3 class="notValid"><b>Debe tener</b> un numero</span>
+              <h3>La contraseña debe contener lo siguiente:</h3>
+              <ul class="helpField">
+                <li><span #length class="notValid"><b>Debe Contener</b> al menos 6 caracteres.</span></li>
+                <li><span #lower class="notValid"><b>Debe Contener</b> letra minúscula.</span></li>
+                <li><span #capital class="notValid"><b>Debe Contener </b>letra mayúscula.</span></li>
+                <li><span #number class="notValid"><b>Debe Contener</b> un numero.</span></li>
+                <li><span #special class="notValid"><b>Debe Contener</b> un carácter especial.</span></li>
+              </ul>
 
-                <label class="text-danger" *ngIf="this.form.get('password')?.errors?.['required']">
-                  Ingrese contraseña de 6 dígitos
+                <label class="text-danger" *ngIf="this.form.get('password')?.errors?.['pattern']">
+                  Ingrese una letra mayúscula
                 </label>
                 <label *ngIf="this.form.get('password')?.errors?.['minlength']">
                   Invalida
