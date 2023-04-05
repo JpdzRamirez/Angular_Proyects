@@ -8,7 +8,8 @@ import { myfunctionsService } from 'src/app/utils/my-functions';
 @Component({
   selector: 'app-Login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  providers:[myfunctionsService]
 })
 export class LoginComponent implements OnInit,AfterViewInit,AfterContentInit{
 
