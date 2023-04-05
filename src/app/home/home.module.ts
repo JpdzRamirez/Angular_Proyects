@@ -9,18 +9,20 @@ import { LoginComponent } from './login/login.component';
 import {MaterialCdkModule} from '../material-cdk/material-cdk.module';
 
 
-
-
-
 const declaration=[HomeComponent,LoginComponent];
 const importe=[CommonModule,HomeRoutingModule,MaterialCdkModule];
 
 @NgModule({
   declarations: [
-    declaration
+    declaration,
+
   ],
   imports: [
-    importe
-  ]
+    importe,
+
+  ],
+  providers:[
+
+   ]
 })
 export class HomeModule { }

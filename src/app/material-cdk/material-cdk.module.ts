@@ -26,7 +26,7 @@ import { MatInputModule } from '@angular/material/input';
 const components = [MatToolbarModule, MatIconModule,MatCardModule,
                     MatButtonModule,FlexLayoutModule,ReactiveFormsModule,
                     MatDialogModule,FormsModule,MatFormFieldModule,MatInputModule,MatSelectModule
-                   ];
+                  ];
 @NgModule({
   declarations: [],
   imports: [

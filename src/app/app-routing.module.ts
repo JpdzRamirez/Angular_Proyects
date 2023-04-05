@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/board',
+    redirectTo: '/home',
     pathMatch: 'full',
   },
   {
@@ -23,6 +23,7 @@ const routes: Routes = [
     //loadChildren: './board/board.module#BoardModule'
     loadChildren: () => import('./crud/crud.module').then(m => m.CrudModule)
   },
+
 ];
 
 @NgModule({

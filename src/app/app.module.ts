@@ -23,10 +23,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
+import { SingupComponent } from './home/singup/singup.component';
+import { myfunctionsService } from './utils/my-functions';
 
 @NgModule({
   declarations: [
     AppComponent,
+    SingupComponent,
 
   ],
   imports: [
@@ -43,7 +46,7 @@ import {MatIconModule} from '@angular/material/icon';
     MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatIconModule
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
