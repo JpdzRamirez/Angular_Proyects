@@ -16,30 +16,30 @@
               onblur="this.placeholder='Ingrese Usuario'">
               </span>
             </p>
-            <div #userValidation [ngClass]="updateClassUserField(inputUser.value)" class="" hidden>
-              <label  *ngIf="this.form.get('user')?.errors?.['required']">
-                Ingrese Usuario
-              </label>
-                  <ng-container *ngIf="this.form.get('user')?.errors?.['minlength']; then loggedIn; else loggedOut">
-                  </ng-container>
-                  <ng-template #loggedIn>
-                      <label >
-                        Debe tener como mínimo 6 caracteres
-                      </label>
-                  </ng-template>
-                  <ng-template #loggedOut>
-                    <div>
-                      Please friend, login.
-                    </div>
-                  </ng-template>
-                  <ng-template #elseBlock>Content to render when condition is false.</ng-template>
-            </div>
-            </div>
 
+              <div #userValidation [ngClass]="updateClassUserField(inputUser.value)" class="" hidden>
+                <label  *ngIf="this.form.get('user')?.errors?.['required']">
+                  Ingrese Usuario
+                </label>
+                    <ng-container *ngIf="this.form.get('user')?.errors?.['minlength']; then loggedIn; else loggedOut">
+                    </ng-container>
+                    <ng-template #loggedIn>
+                        <label >
+                          Debe tener como mínimo 6 caracteres
+                        </label>
+                    </ng-template>
+                    <ng-template #loggedOut>
+                      <div>
+                        Please friend, login.
+                      </div>
+                    </ng-template>
+                    <ng-template #elseBlock>Content to render when condition is false.</ng-template>
+              </div>
+            </div>
             <div class="inputSpan">
               <p>
               <span class="neon">
-            <input required
+            <input #inputPassword (keyup)="onChangesPasswordField()" required
             formControlName="password"
             matInput [type]="hide ? 'password' : 'text'"
             placeholder="Ingrese Contraseña"
@@ -52,13 +52,39 @@
             </a>
               </span>
             </p>
+              <div #passwordValidation class="" hidden
+                [ngClass]="updateClassPasswordField(inputPassword.value)"
+              >
+              <h3>La contraseña debe contener lo siguiente:</h3>
+              <ul class="helpField">
+                <li><span #length class="notValid"><b>Debe Contener</b> al menos 6 caracteres.</span></li>
+                <li><span #lower class="notValid"><b>Debe Contener</b> letra minúscula.</span></li>
+                <li><span #capital class="notValid"><b>Debe Contener </b>letra mayúscula.</span></li>
+                <li><span #number class="notValid"><b>Debe Contener</b> un numero.</span></li>
+                <li><span #special class="notValid"><b>Debe Contener</b> un carácter especial.</span></li>
+              </ul>
 
+                <ng-template  *ngIf="this.form.get('password')?.errors?.['passwordChecker']!=null;then notValid else success">
+                </ng-template>
+                <ng-template #notValid>
+                <label class="text-danger">(NOT VALID)</label>
+                </ng-template>
+                <ng-template #success>
+                <label  class="text-success">(VALID)</label>
+                </ng-template>
+              </div>
             </div>
       </div>
       <div class="buttonsLogin">
         <button type="submit" [disabled]="form.invalid" style="--clr:#03C4A1" ><span>Iniciar Sesión</span><i></i></button>
-        <button type="button" (click)="registrar()" style="--clr:#03C4A1" ><span>Registrarse</span><i></i></button>
+        <button type="button" style="--clr:#03C4A1" ><span>Registrarse</span><i></i></button>
       </div>
+      <p>
+        Real-time data: {{ form.value | json }}
+      </p>
+      <p>
+        Your form status is : {{ form.status }}
+      </p>
     </form>
   </div>
 </div>

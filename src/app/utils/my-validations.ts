@@ -8,8 +8,8 @@ export class myValidations{
     const valid = regex.test(control.value);
 
     if(valid!=true){
-      //console.log(valid)
-      return {upperCaseLetter:true};
+      console.log(valid)
+      return {passwordChecker:true};
     }
     return null;
   }
