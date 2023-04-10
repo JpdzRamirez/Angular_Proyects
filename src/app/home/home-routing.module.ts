@@ -1,20 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HomeComponent } from './home/home.component';
-import { SingupComponent } from './singup/singup.component';
+import { ForgotComponent } from './forgotPassword/forgot.component';
+import { SignupComponent } from './signup/signup.component';
+import { LoginComponent } from './login/login.component';
+
 
 const routes: Routes = [
 
   {
   path: '',
-  component: HomeComponent
-  },
-  {
-    path: 'singup',
-    component: SingupComponent
-    },
-];
+  children:[
+    {path: 'login', component: LoginComponent},
+    {path: 'signup', component: SignupComponent},
+    {path: 'forgot', component: ForgotComponent},
+    {path: '**', redirectTo: 'login'}
+    ]},
+
+];//3172367896
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

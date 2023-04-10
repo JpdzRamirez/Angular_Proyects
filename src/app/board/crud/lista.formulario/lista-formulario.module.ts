@@ -6,13 +6,22 @@ import { DialogComponent } from './dialog/dialog.component';
 
 import { MaterialCdkModule } from '../../../utils/material-cdk/material-cdk.module';
 
-const declarables=[ListaFormularioComponent,DialogComponent];
+const declared=[ListaFormularioComponent,DialogComponent];
+
+const exported=[ListaFormularioComponent,DialogComponent];
+
+const imported=[CommonModule,MaterialCdkModule,];
+
+
 @NgModule({
-  declarations: [declarables],
-  imports: [
-    CommonModule,
-    MaterialCdkModule,
+  declarations: [
+    declared
   ],
-  exports: [declarables],
+  imports: [
+    imported
+  ],
+  exports: [
+    exported
+  ],
 })
 export class ListaFormularioModule { }

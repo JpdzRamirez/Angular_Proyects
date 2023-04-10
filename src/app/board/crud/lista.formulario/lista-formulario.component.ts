@@ -51,7 +51,7 @@ export class ListaFormularioComponent implements OnInit {
       this.setListaDatos(resp.results);
       });
 
-  }
+    }
 
 
   // SETTERS

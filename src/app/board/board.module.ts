@@ -2,19 +2,26 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { BoardRoutingModule } from './board-routing.module';
-import { BoardComponent } from './board/board.component';
-import { CrudModule } from './crud/crud.module';
+
+import { AgregarComponent } from './crud/agregar/agregar.component';
+
+import { ListaFormularioModule } from './crud/lista.formulario/lista-formulario.module';
 
 
+const imported=[CommonModule,BoardRoutingModule,ListaFormularioModule];
+const declared=[AgregarComponent];
+const exported=[AgregarComponent];
 
 @NgModule({
   declarations: [
-    BoardComponent
+    declared,
   ],
   imports: [
-    CommonModule,
-    BoardRoutingModule,CrudModule
+    imported,
+  ],
+  exports:[
+    exported
+  ],
 
-  ]
 })
 export class BoardModule { }

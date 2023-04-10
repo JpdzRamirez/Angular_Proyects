@@ -77,17 +77,10 @@
       </div>
       <div class="buttonsLogin">
         <button type="submit" [disabled]="form.invalid" style="--clr:#03C4A1" ><span>Iniciar Sesión</span><i></i></button>
-        <button type="button" style="--clr:#03C4A1" >
-          <a href="#" routerLink="/singup" routerLinkActive="active" class="toolbar__menu__text">
-          </a>
+        <button type="button" style="--clr:#03C4A1" (click)="registrar()">
           <span>Registrarse</span><i></i></button>
       </div>
-      <p>
-        Real-time data: {{ form.value | json }}
-      </p>
-      <p>
-        Your form status is : {{ form.status }}
-      </p>
+
     </form>
   </div>
 </div>

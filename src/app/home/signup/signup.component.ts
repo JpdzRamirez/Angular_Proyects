@@ -1,16 +1,18 @@
-import { Component, ElementRef,Input,
-  OnInit, ViewChild,AfterViewInit,AfterContentInit, Renderer2 } from '@angular/core';
-import { FormBuilder,FormGroup, Validators } from '@angular/forms';
+import { Component, ElementRef,Output,
+  OnInit, ViewChild,AfterViewInit,AfterContentInit, Renderer2,RendererFactory2  } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
-import { myValidations } from 'src/app/utils/my-validations';
-import { myfunctionsService } from 'src/app/utils/my-functions';
+import { myValidations } from '../../utils/my-validations';
+import { myfunctionsService } from '../../utils/services/my-functions.service';
+import { UsuariosService } from 'src/app/utils/services/usuarios.service';
+
 
 @Component({
-  selector: 'app-singup',
-  templateUrl: './singup.component.html',
-  styleUrls: ['./singup.component.scss']
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss']
 })
-export class SingupComponent {
+export class SignupComponent implements OnInit {
 
 
     //DOOM ELEMENT CHILD ACCESS
@@ -31,8 +33,13 @@ export class SingupComponent {
       private  numbers;
       private  especialLetters;
 
-      constructor(private renderer2:Renderer2,private fb:FormBuilder,private tempo:myfunctionsService){
-
+      constructor(
+        private fb:FormBuilder,
+        private renderer2: Renderer2,
+        private herramientas:myfunctionsService,
+        private Usuarios:UsuariosService,
+        ){
+        //this.renderer2 = rendererFactory.createRenderer(null, null);
         this.form  = this.fb.group({
               user:['',[Validators.required, Validators.minLength(6)]],
               password:['',[Validators.required,myValidations.passwordChecker]]
@@ -44,16 +51,14 @@ export class SingupComponent {
           this.especialLetters=/[!@?=.*&%$#]/d;
       }
 
-      public hideElementHtml(ElementRef:any, status:boolean):void{
-        let seconds = 0.25;
-        if(status==true){// if status is true hidden element has been removed
-          this.renderer2.removeAttribute(ElementRef,'hidden');
-        }else if(status==false){
-          setTimeout(() => { // set attribute value after 3 seconds,
-            this.renderer2.setAttribute(ElementRef,'hidden','');
-          }, seconds * 1000);
-        }
+
+      ngOnInit(): void {
+        this.Usuarios.cargarUsuarios().subscribe(resp=>{
+          console.log(resp);
+        });
       }
+
+
 
       public updateClassPasswordField(parametro:any):any{
         return{
@@ -74,9 +79,9 @@ export class SingupComponent {
         const asUserElement=this.userInput.nativeElement;
 
         if(this.form.controls['user'].value!=""){
-          this.hideElementHtml(asUserElement,true);
+          this.herramientas.hideHtmlElement(asUserElement,true);
         }else{
-          this.hideElementHtml(asUserElement,false);
+          this.herramientas.hideHtmlElement(asUserElement,false);
         }
       }
       public onChangesPasswordField(){
@@ -103,59 +108,59 @@ export class SingupComponent {
           //if hidden is assigned it will be removed
 
           //this.hideElementHtml(asPasswordElement,true);
-          this.tempo.hideHtmlElement(asPasswordElement,true);
+          this.herramientas.hideHtmlElement(asPasswordElement,true);
 
           // Length of password ✅
               if(tempPivote.length>=6){ //validamos longitud >6 ok , <6 not ok
-                  this.renderer2.removeClass(asLengthElement,'notValid');
-                  this.renderer2.addClass(asLengthElement,'valid');
+                  this.herramientas.removedClass(asLengthElement,'notValid');
+                  this.herramientas.addedClass(asLengthElement,'valid');
               }else{
-                  this.renderer2.removeClass(asLengthElement,'valid');
-                  this.renderer2.addClass(asLengthElement,'notValid');
+                  this.herramientas.removedClass(asLengthElement,'valid');
+                  this.herramientas.addedClass(asLengthElement,'notValid');
               }
 
               // LowerCaseLetter of password Ⓜ
               if(tempPivote.match(this.lowerCaseLetters)){
 
-                this.renderer2.removeClass(asLowerElement,'notValid');
-                  this.renderer2.addClass(asLowerElement,'valid');
+                this.herramientas.removedClass(asLowerElement,'notValid');
+                  this.herramientas.addedClass(asLowerElement,'valid');
               }else{
-                this.renderer2.removeClass(asLowerElement,'valid');
-                  this.renderer2.addClass(asLowerElement,'notValid');
+                this.herramientas.removedClass(asLowerElement,'valid');
+                  this.herramientas.addedClass(asLowerElement,'notValid');
               }
 
               //  UpperCaseLetter of password Ⓜ
               if(tempPivote.match(this.upperCaseLetters)){
 
-                this.renderer2.removeClass(asCapitalElement,'notValid');
-                  this.renderer2.addClass(asCapitalElement,'valid');
+                this.herramientas.removedClass(asCapitalElement,'notValid');
+                  this.herramientas.addedClass(asCapitalElement,'valid');
               }else {
-                this.renderer2.removeClass(asCapitalElement,'valid');
-                  this.renderer2.addClass(asCapitalElement,'notValid');
+                this.herramientas.removedClass(asCapitalElement,'valid');
+                  this.herramientas.addedClass(asCapitalElement,'notValid');
               }
 
               // NumbersCaseLetter of password 5️⃣
               if(tempPivote.match(this.numbers)){
 
-                this.renderer2.removeClass(asNumberElement,'notValid');
-                  this.renderer2.addClass(asNumberElement,'valid');
+                this.herramientas.removedClass(asNumberElement,'notValid');
+                  this.herramientas.addedClass(asNumberElement,'valid');
               }else{
-                this.renderer2.removeClass(asNumberElement,'valid');
-                  this.renderer2.addClass(asNumberElement,'notValid');
+                this.herramientas.removedClass(asNumberElement,'valid');
+                  this.herramientas.addedClass(asNumberElement,'notValid');
               }
 
               // EspeciaCaseLetter of password
               if(tempPivote.match(this.especialLetters)){
 
-                this.renderer2.removeClass(asEspecialElement,'notValid');
-                  this.renderer2.addClass(asEspecialElement,'valid');
+                this.herramientas.removedClass(asEspecialElement,'notValid');
+                  this.herramientas.addedClass(asEspecialElement,'valid');
               }else{
-                this.renderer2.removeClass(asEspecialElement,'valid');
-                  this.renderer2.addClass(asEspecialElement,'notValid');
+                this.herramientas.removedClass(asEspecialElement,'valid');
+                  this.herramientas.addedClass(asEspecialElement,'notValid');
               }
 
         }else {
-          this.hideElementHtml(asPasswordElement,false);
+          this.herramientas.hideHtmlElement(asPasswordElement,false);
         }
 
       }
