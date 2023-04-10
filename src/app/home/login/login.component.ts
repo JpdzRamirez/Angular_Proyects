@@ -1,9 +1,11 @@
 import { Component, ElementRef,Input,
 OnInit, ViewChild,AfterViewInit,AfterContentInit, Renderer2 } from '@angular/core';
-import { FormBuilder,FormControl,FormGroup, Validators } from '@angular/forms';
+import { FormBuilder,FormGroup, Validators } from '@angular/forms';
+
 
 import { myValidations } from 'src/app/utils/my-validations';
 import { myfunctionsService } from 'src/app/utils/my-functions';
+
 
 @Component({
   selector: 'app-Login',

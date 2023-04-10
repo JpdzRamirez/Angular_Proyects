@@ -18,11 +18,11 @@ const routes: Routes = [
     //loadChildren: './home/home.module#HomeModule',
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
-  {
-    path: 'crud',
-    //loadChildren: './board/board.module#BoardModule'
-    loadChildren: () => import('./crud/crud.module').then(m => m.CrudModule)
-  },
+  // {
+  //   path: 'crud',
+  //   //loadChildren: './board/board.module#BoardModule'
+  //   loadChildren: () => import('./crud/crud.module').then(m => m.CrudModule)
+  // },
 
 ];
 

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MaterialCdkModule } from "./../material-cdk/material-cdk.module";
+import { MaterialCdkModule } from "../utils/material-cdk/material-cdk.module";
 import { RouterModule } from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
 

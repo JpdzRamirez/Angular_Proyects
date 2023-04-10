@@ -9,11 +9,11 @@ import { ListaFormularioModule } from './lista.formulario/lista-formulario.modul
 import { CrudComponenteComponent } from '../crud/crud.componente/crud.componente.component';
 
 //Providers
-import { TraerDatosService } from 'src/app/servicios/traer-datos.service';
-import { ModificarDatosService } from 'src/app/servicios/modificar-datos.service';
+import { TraerDatosService } from '../../utils/services/traer-datos.service';
+import { ModificarDatosService } from '../../utils/services/modificar-datos.service';
 
 //Materiales
-import {MaterialCdkModule} from '../material-cdk/material-cdk.module'
+import {MaterialCdkModule} from '../../utils/material-cdk/material-cdk.module'
 
 
 const declarables = [CrudComponenteComponent];
@@ -26,10 +26,10 @@ const declarables = [CrudComponenteComponent];
     MaterialCdkModule,
     ListaFormularioModule,
   ],
- providers: [
+providers: [
   TraerDatosService,
   ModificarDatosService
- ],
- exports: [declarables],
+],
+exports: [declarables],
 })
 export class CrudModule { }

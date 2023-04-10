@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ListaFormularioComponent } from '../lista.formulario/lista-formulario.component';
 import { DialogComponent } from './dialog/dialog.component';
 
-import { MaterialCdkModule } from 'src/app/material-cdk/material-cdk.module';
+import { MaterialCdkModule } from '../../../utils/material-cdk/material-cdk.module';
 
 const declarables=[ListaFormularioComponent,DialogComponent];
 @NgModule({

@@ -8,11 +8,11 @@ import {MatDialog,MatDialogConfig} from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
 
 //OBJETO BASE MOLDE
-import { Persona } from '../../objects/persona.class';
+import { Persona } from '../../../utils/objects/persona.class';
 
 //SERVICIOS IMPORTAR DATOS DEL API
-import { TraerDatosService } from 'src/app/servicios/traer-datos.service';
-import { ModificarDatosService } from 'src/app/servicios/modificar-datos.service';
+import { TraerDatosService } from '../../../utils/services/traer-datos.service';
+import { ModificarDatosService } from '../../../utils/services/modificar-datos.service';
 
 
 @Component({
