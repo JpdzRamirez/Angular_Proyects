@@ -1,6 +1,4 @@
-<p>singup works!</p>
-<div class="bodyLogin">
-  <mat-toolbar color="primary" class="toolbar" >
+<!-- <mat-toolbar color="primary" class="toolbar" >
     <nav class="toolbar__menu">
       <ul class="menu-bar">
         <li>
@@ -31,61 +29,95 @@
         </li>
       </ul>
     </nav>
-  </mat-toolbar>
-
-
-<div class="login">
-  <img src="../../../assets/candado.png" style="width: 50%;">
-  <h1>Login</h1>
-
-  <form  novalidate [formGroup]="form" (ngSubmit)="ingresar()">
+  </mat-toolbar> -->
+  <form class="container"  novalidate [formGroup]="form" (ngSubmit)="ingresar()">
     <div class="inputsDiv">
-
-          <div class="inputSpan">
-            <p>
-            <span class="neon">
-            <input #inputUser (keyup)="onChangesUserField()" required formControlName="user" type="text"
-            placeholder="Usuario"
-            onfocus="this.placeholder=''"
-            onblur="this.placeholder='Ingrese Usuario'">
-            </span>
-          </p>
-
-            <div #userValidation [ngClass]="updateClassUserField(inputUser.value)" class="" hidden>
-              <label  *ngIf="this.form.get('user')?.errors?.['required']">
-                Ingrese Usuario
-              </label>
-                  <ng-container *ngIf="this.form.get('user')?.errors?.['minlength']; then loggedIn; else loggedOut">
-                  </ng-container>
-                  <ng-template #loggedIn>
-                      <label >
-                        Debe tener como mínimo 6 caracteres
-                      </label>
-                  </ng-template>
-                  <ng-template #loggedOut>
-                    <div>
-                      Please friend, login.
-                    </div>
-                  </ng-template>
-                  <ng-template #elseBlock>Content to render when condition is false.</ng-template>
+      <h1>Register form</h1>
+      <span class="fillSpan">Fill out this form</span>
+        <!-- Email ADDRESS input -->
+        <div class="text-start">
+          <div class="row">
+            <div class="col">
+              <div class="mb-3" style="text-align: start;">
+                <label for="exampleInputEmail1" class="form-label text-start">Nombres</label>
+                <input #inputFirstName  type="text" class="form-control"  aria-describedby="emailHelp"
+                (blur)="onChangesInputField()" required formControlName="firstName"
+                placeholder="Ingrese nombres"
+                onfocus="this.placeholder=''"
+                onblur="this.placeholder='Ingrese nombres'">
+              </div>
+            </div>
+            <div class="col">
+              <div class="mb-3" style="text-align: start;">
+                <label for="exampleInputEmail1" class="form-label text-start">Apellidos</label>
+                <input #inputLastName  type="text" class="form-control"  aria-describedby="emailHelp"
+                (blur)="onChangesInputField()" required formControlName="lastName"
+                placeholder="Ingrese apellidos"
+                onfocus="this.placeholder=''"
+                onblur="this.placeholder='Ingrese apellidos'">
+              </div>
             </div>
           </div>
-          <div class="inputSpan">
-            <p>
-            <span class="neon">
-          <input #inputPassword (keyup)="onChangesPasswordField()" required
-          formControlName="password"
-          matInput [type]="hide ? 'password' : 'text'"
-          placeholder="Ingrese Contraseña"
-          onfocus="this.placeholder=''"
-          onblur="this.placeholder='Ingrese Contraseña'" type="password" autocomplete="on"
-          >
+        </div>
 
-          <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </a>
-            </span>
-          </p>
+        <!-- EMAIL PICK 💌 -->
+        <div class="mb-3" style="text-align: start;">
+          <label for="exampleFormControlInput1" class="form-label">Email address</label>
+          <input #inputEmail type="email" class="form-control"
+          (blur)="onChangesInputField()" required formControlName="email"
+          placeholder="Ingrese correo"
+          onfocus="this.placeholder=''"
+          onblur="this.placeholder='Ingrese correo'">
+        </div>
+
+
+        <label class="labelCalendar" for="dateofbirth">Date Of Birth</label>
+        <input class="inputCalendar" type="date" name="dateofbirth" id="dateofbirth" formControlName="date">
+
+        <div class="mb-3" style="text-align: start;">
+          <label for="exampleFormControlInput1" class="form-label">Nombre de usuario</label>
+          <input #inputUser  class="form-control"
+          (keyup)="onChangesUserField()" required formControlName="user"
+          placeholder="Ingrese usuario" required
+          onfocus="this.placeholder=''"
+          onblur="this.placeholder='Ingrese usuario'">
+        </div>
+          <div #userValidation [ngClass]="updateClassUserField(inputUser.value)" class="" hidden>
+            <label  *ngIf="this.form.get('user')?.errors?.['required']">
+              Ingrese Usuario
+            </label>
+                <ng-container *ngIf="this.form.get('user')?.errors?.['minlength']; then loggedIn; else loggedOut">
+                </ng-container>
+                <ng-template #loggedIn>
+                    <label >
+                      Debe tener como mínimo 6 caracteres
+                    </label>
+                </ng-template>
+                <ng-template #loggedOut>
+                  <div>
+                    Correcto ✌
+                  </div>
+                </ng-template>
+          </div>
+
+          <div class="mb-3" style="text-align: start;">
+            <label for="exampleFormControlInput1" class="form-label">Contraseña</label>
+            <div class="input-group mb-3" style="align-items: center;">
+
+            <input #inputPassword (keyup)="onChangesPasswordField()" required class="form-control"
+            type="password" autocomplete="on"
+            matInput [type]="hide ? 'password' : 'text'"
+            (keyup)="onChangesUserField()"  formControlName="password"
+            placeholder="Ingrese contraseña" required
+            onfocus="this.placeholder=''"
+            onblur="this.placeholder='Ingrese contraseña'">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2" style="padding: inherit;">
+              <a style="margin: -9px;" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </a>
+            </button>
+          </div>
+          </div>
             <div #passwordValidation class="" hidden
               [ngClass]="updateClassPasswordField(inputPassword.value)"
             >
@@ -107,12 +139,47 @@
               <label  class="text-success">(VALID)</label>
               </ng-template>
             </div>
-          </div>
-    </div>
+
+            <!-- CONFIRM PASSWORD -->
+
+              <div class="input-group mb-3">
+                <input #inputPasswordConfirm (keyup)="onPasswordFieldConfirm()" required class="form-control"
+                type="password" autocomplete="on"
+                matInput [type]="hide2 ? 'password' : 'text'"
+                formControlName="confirmPassword"
+                placeholder="Ingrese contraseña"
+                onfocus="this.placeholder=''"
+                onblur="this.placeholder='Ingrese contraseña'">
+                <button class="btn btn-outline-secondary" type="button" id="button-addon3" style="padding: inherit;">
+                  <a style="margin: -9px;" mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
+                    <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </a>
+                </button>
+              </div>
+              <div *ngIf="f['confirmPassword'].getError('Mustmatch')!=null">
+                <h1>VALID ❤</h1>
+              </div>
+              <!-- <div #passwordConfirmation class="" hidden
+              [ngClass]="updatePasswordFieldConfirm(inputPasswordConfirm.value)">
+              <ng-template  *ngIf="this.form.get('confirmPassword')?.errors?.['passwordChecker']==true;then notValid else success">
+              </ng-template>
+              <ng-template #notValid>
+              <label class="text-danger">(NOT VALID)</label>
+              </ng-template>
+              <ng-template #success>
+              <label  class="text-success">(VALID)</label>
+              </ng-template>
+              </div> -->
+
+            <!-- END INPUTS FORM FIELDS -->
+      </div>
+
     <div class="buttonsLogin">
-      <button type="submit" [disabled]="form.invalid" style="--clr:#03C4A1" ><span>Iniciar Sesión</span><i></i></button>
-      <button type="button" style="--clr:#03C4A1" ><span>Registrarse</span><i></i></button>
+      <!-- [disabled]="form.invalid" -->
+      <button type="submit"  style="--clr:#03C4A1" ><span>Submit</span><i></i></button>
+      <button type="button" style="--clr:#03C4A1" ><span>Regresar</span><i></i></button>
     </div>
+
     <p>
       Real-time data: {{ form.value | json }}
     </p>
@@ -120,5 +187,7 @@
       Your form status is : {{ form.status }}
     </p>
   </form>
-</div>
-</div>
+
+
+
+

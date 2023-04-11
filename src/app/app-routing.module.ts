@@ -21,11 +21,7 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
 
   },
-  {
-  path: '**',
-    redirectTo: '/home',
-    pathMatch: 'full',
-  },
+
 
 ];
 

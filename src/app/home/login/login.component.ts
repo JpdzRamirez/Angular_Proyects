@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit{
       ngOnInit(): void {
 
       }
+
       constructor(private fb:FormBuilder,private herramientas:myfunctionsService,private router:Router){
 
         this.form  = this.fb.group({
@@ -62,14 +63,14 @@ export class LoginComponent implements OnInit{
           'validationDiv_disabled':parametro.length ==0,
           'validationDiv_enabled':parametro.length >0
       }
-    }
-    public updateClassUserField(parametro:any):any{
-      return{
-        'validationDiv_disabled':parametro.length ==0,
-        'validationDiv_enabled':parametro.length >0
+      }
+      public updateClassUserField(parametro:any):any{
+        return{
+          'validationDiv_disabled':parametro.length ==0,
+          'validationDiv_enabled':parametro.length >0
+          }
         }
-    }
-   //child functions
+      //child functions
 
       public onChangesUserField(){
         //si existen registros en user input
@@ -81,6 +82,8 @@ export class LoginComponent implements OnInit{
           this.herramientas.hideHtmlElement(asUserElement,false);
         }
       }
+
+
       public onChangesPasswordField(){
 
         //password input value

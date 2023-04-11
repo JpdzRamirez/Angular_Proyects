@@ -1,8 +1,11 @@
-import { Injectable, Renderer2, RendererFactory2 } from "@angular/core";
+import { Directive, Renderer2, RendererFactory2 } from "@angular/core";
 
 
-@Injectable({
-  providedIn: 'root'
+// @Injectable({
+//   providedIn: 'root'
+// })
+@Directive({
+  selector: '[appGoWild]'
 })
 export class myfunctionsService{
 

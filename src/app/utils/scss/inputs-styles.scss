@@ -1,0 +1,97 @@
+@import './animations/keyframe-input.scss';
+
+
+      .movible:focus{
+        color:#3bfc00 ;
+        text-align: left !important;
+      }
+
+  .inputsDiv{
+    .inputSpan{
+      p {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: nowrap;
+        .neon{
+          position:relative;
+              // the border gradient
+              background: linear-gradient(21deg, #10abff, #1beabd);
+
+              // the width of the input border
+              padding: 3px;
+
+              // we want inline fields by default
+              display: inline-block;
+
+              // we want rounded corners no matter the size of the field
+              border-radius: 50px;
+              // style of the actual input field
+
+          &:hover {
+                background:#f5f5f5 ;
+                      -webkit-animation: shadow-drop-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+                      animation: shadow-drop-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+          }
+               // needs to be relative so the :focus span is positioned correctly
+              input{
+                &::placeholder{
+                  color: gray;
+                }
+                text-align: center;                font-size: 1.7em;
+                border-radius: 24px;
+                border-width: 0px;
+                background:whitesmoke ;
+                &:focus{
+                  outline: none;
+                }
+              }
+          a {
+            translate: 4px !important;
+            padding: 1px !important;
+            display: inline !important;
+            bottom: -3px !important;
+          }
+        }
+      } // P
+        .validationDiv_enabled{
+        -webkit-animation: swing-in-top-fwd 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+        animation: swing-in-top-fwd 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+
+        background: rgba(167, 167, 167, 0.418) !important;
+        border-radius: 25px;
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+
+        .helpField{
+          text-align: initial;
+          translate: 10%;
+          list-style-type: none;
+        }
+            .valid::before{
+              position: relative;
+              content: "✅";
+            }
+            .notValid::before{
+              position: relative;
+              content: "❌";
+            }
+        }
+        .validationDiv_disabled{
+          -webkit-animation: slide-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	        animation: slide-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+          background: rgba(167, 167, 167, 0.418) !important;
+          border-radius: 25px;
+          margin-bottom: 10px;
+          display: flex;
+          flex-direction: column;
+        }
+
+      }
+    } //INPUT span
+
+
+
+
+
