@@ -1,10 +1,11 @@
 import { Component, ElementRef,Output,
   OnInit, ViewChild,AfterViewInit,AfterContentInit, Renderer2,RendererFactory2  } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
 import { myValidations } from '../../utils/my-validations';
 import { myfunctionsService } from '../../utils/services/my-functions.service';
 import { UsuariosService } from 'src/app/utils/services/usuarios.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,14 +19,14 @@ export class SignupComponent implements OnInit {
     //DOOM ELEMENT CHILD ACCESS
     @ViewChild('userValidation', {static: false})userInput:ElementRef<HTMLInputElement> = {} as ElementRef;
     @ViewChild('passwordValidation', {static: false})passwordInput:ElementRef<HTMLInputElement> = {} as ElementRef;
-    @ViewChild('passwordConfirmation', {static: false})inputPasswordConfirm:ElementRef<HTMLInputElement> = {} as ElementRef;
+    @ViewChild('passwordConfirmValidation', {static: false})PasswOrdConfirmValidation:ElementRef<HTMLInputElement> = {} as ElementRef;
     @ViewChild('length', {static: false})lengthInput:ElementRef<HTMLInputElement>={} as ElementRef;
     @ViewChild('lower', {static: false})lowerInput:ElementRef<HTMLInputElement>={} as ElementRef;
     @ViewChild('capital', {static: false})capitalInput:ElementRef<HTMLInputElement>={} as ElementRef;
     @ViewChild('number', {static: false})numberInput:ElementRef<HTMLInputElement>={} as ElementRef;
     @ViewChild('special', {static: false})specialInput:ElementRef<HTMLInputElement>={} as ElementRef;
 
-    public form=new FormGroup({});;
+    public form:FormGroup;
     public hide=true;
     public hide2=true;
       //RegExp
@@ -36,24 +37,23 @@ export class SignupComponent implements OnInit {
 
       constructor(
         private fb:FormBuilder,
-        private renderer2: Renderer2,
         private herramientas:myfunctionsService,
         private Usuarios:UsuariosService,
+        private router:Router,
         ){
         //this.renderer2 = rendererFactory.createRenderer(null, null);
         this.form  = this.fb.group({
-              firstName:['',[Validators.required,Validators.maxLength(20)]],
-              lastName:['',[Validators.required,Validators.maxLength(20)]],
-              email:['',[Validators.required,Validators.email]],
-              date:['',[Validators.required]],
-              user:['',[Validators.required, Validators.minLength(6)]],
-              password:['',[Validators.required,myValidations.passwordChecker]],
-              confirmPassword:['',[Validators.required]],
-          },
-          {
-            Validators:this.MatchPassword('password','confirmPassword')
-          }
-          );
+              firstName:fb.control('',[Validators.required,Validators.maxLength(20)]),
+              lastName:fb.control('',[Validators.required,Validators.maxLength(20)]),
+              email:fb.control('',[Validators.required,Validators.email]),
+              date:fb.control('',[Validators.required]),
+              user:fb.control('',[Validators.required, Validators.minLength(6)]),
+              password:fb.control('',[Validators.required,myValidations.passwordChecker]),
+              confirmPassword:fb.control('',[Validators.required]),
+          },);
+          this.form.addValidators(
+            this.herramientas.matchValidator(this.form.get('password'),this.form.get('confirmPassword')));
+
           //Validators.pattern('^(?=.*?[A-Z]).$')
           this.upperCaseLetters=/[A-Z]/g;
           this.lowerCaseLetters=/[a-z]/g;
@@ -61,31 +61,15 @@ export class SignupComponent implements OnInit {
           this.especialLetters=/[!@?=.*&%$#]/d;
       }
 
-      get f(){
-        return this.form.controls;
-      }
-
-  MatchPassword(password: string, confirmPassword: string) {
-    return (formGroup: FormGroup) => {
-      const passwordControl = formGroup.controls[password];
-      const confirmPasswordControl = formGroup.controls[confirmPassword];
-
-      if (!passwordControl || !confirmPasswordControl) {
-        return null;
-      }
-
-      if (confirmPasswordControl.errors && !confirmPasswordControl.errors['MustMatch']) {
-        return null;
-      }
-
-      if (passwordControl.value !== confirmPasswordControl.value) {
-        confirmPasswordControl.setErrors({ Mustmatch: true });
-      } else {
-        confirmPasswordControl.setErrors(null);
-      }
-    }
-
-  }
+      // matchValidator(control:any,controlTwo:any): ValidatorFn {
+      //   return () => {
+      //     //console.log("in match validtaion "+control.value+" ."+controlTwo.value)
+      //     if (control.value !== controlTwo.value){
+      //       return { match_error: true };
+      //     }
+      //     return null;
+      //   };
+      // }
 
       ngOnInit(): void {
         this.Usuarios.cargarUsuarios().subscribe(resp=>{
@@ -94,12 +78,12 @@ export class SignupComponent implements OnInit {
       }
 
 
-     public updatePasswordFieldConfirm(parametro:any):any{
-      return{
-        'validationDivConfirmPassword_disabled':parametro.length ==0,
-        'validationDivConfirmPassword_enabled':parametro.length >0
-    }
-      }
+    // public updatePasswordFieldConfirm(parametro:any):any{
+    //   return{
+    //     'validationDivConfirmPassword_disabled':parametro.length ==0,
+    //     'validationDivConfirmPassword_enabled':parametro.length >0
+    // }
+    //   }
 
       public updateClassPasswordField(parametro:any):any{
         return{
@@ -131,14 +115,29 @@ export class SignupComponent implements OnInit {
       }
 
       public onPasswordFieldConfirm(){
-        const asPasswordConfirmElement=this.inputPasswordConfirm.nativeElement;
+        const asPasswordConfirmElement=this.PasswOrdConfirmValidation.nativeElement;
+        if(this.form.controls['confirmPassword'].value!=""&& this.form.controls['password'].value!=""){
+          console.log("blue")
+          this.herramientas.hideHtmlElement(asPasswordConfirmElement,true);
+          if(this.form.controls['password'].value==this.form.controls['confirmPassword'].value){
+            this.herramientas.removedClass(asPasswordConfirmElement,'validationDivConfirmPassword_disabled');
+            this.herramientas.addedClass(asPasswordConfirmElement,'validationDivConfirmPassword_enabled');
+          }else{
+            this.herramientas.removedClass(asPasswordConfirmElement,'validationDivConfirmPassword_enabled');
+            this.herramientas.addedClass(asPasswordConfirmElement,'validationDivConfirmPassword_disabled');
+          }
+        }else{
+          this.herramientas.removedClass(asPasswordConfirmElement,'validationDivConfirmPassword_enabled');
+          this.herramientas.addedClass(asPasswordConfirmElement,'validationDivConfirmPassword_disabled');
+          this.herramientas.hideHtmlElement(asPasswordConfirmElement,false);
+        }
       }
 
       public onChangesPasswordField(){
 
         //password input value
         const asPasswordElement=this.passwordInput.nativeElement;
-
+        this.onPasswordFieldConfirm();
         //validators css
         const asLengthElement=this.lengthInput.nativeElement;
         const asCapitalElement=this.capitalInput.nativeElement;
@@ -226,8 +225,9 @@ export class SignupComponent implements OnInit {
       }
       }
 
-      linkBoard(){
-
+      regresar(){
+        console.log("aqui");
+        this.router.navigate(['home/login']);
       }
 
 

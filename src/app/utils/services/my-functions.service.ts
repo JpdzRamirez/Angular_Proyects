@@ -1,4 +1,5 @@
-import { Directive, Renderer2, RendererFactory2 } from "@angular/core";
+import { Directive, Renderer2 } from "@angular/core";
+import { ValidatorFn } from "@angular/forms";
 
 
 // @Injectable({
@@ -36,6 +37,15 @@ export class myfunctionsService{
     this.render.addClass(ElementRef,classRef);
   }
 
+  matchValidator(control:any,controlTwo:any): ValidatorFn {
+    return () => {
+      //console.log("in match validtaion "+control.value+" ."+controlTwo.value)
+      if (control.value !== controlTwo.value){
+        return { match_error: true };
+      }
+      return null;
+    };
+  }
 
 }
 

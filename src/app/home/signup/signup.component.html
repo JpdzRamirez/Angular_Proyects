@@ -156,9 +156,18 @@
                   </a>
                 </button>
               </div>
-              <div *ngIf="f['confirmPassword'].getError('Mustmatch')!=null">
-                <h1>VALID ❤</h1>
+              <!-- <p>
+                errores {{this.form.errors | json }}
+              </p> -->
+              <!-- [ngClass]="updatePasswordFieldConfirm(inputPasswordConfirm.value)" -->
+              <div #passwordConfirmValidation class="" hidden
+              >
+              <!-- <div *ngIf="this.form.getError('match_error')==null"></div> -->
+                <div>
+                  <h1>VALID ❤</h1>
+                </div>
               </div>
+
               <!-- <div #passwordConfirmation class="" hidden
               [ngClass]="updatePasswordFieldConfirm(inputPasswordConfirm.value)">
               <ng-template  *ngIf="this.form.get('confirmPassword')?.errors?.['passwordChecker']==true;then notValid else success">
@@ -176,16 +185,16 @@
 
     <div class="buttonsLogin">
       <!-- [disabled]="form.invalid" -->
-      <button type="submit"  style="--clr:#03C4A1" ><span>Submit</span><i></i></button>
-      <button type="button" style="--clr:#03C4A1" ><span>Regresar</span><i></i></button>
+      <button type="submit"  style="--clr:#f00a0a" ><span>Submit</span><i></i></button>
+      <button type="button" (click)="regresar()" style="--clr:#f00a0a" ><span>Regresar</span><i></i></button>
     </div>
 
-    <p>
+    <!-- <p>
       Real-time data: {{ form.value | json }}
     </p>
     <p>
       Your form status is : {{ form.status }}
-    </p>
+    </p> -->
   </form>
 
 

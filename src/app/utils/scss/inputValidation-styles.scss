@@ -1,3 +1,5 @@
+@import '../../utils/scss/animations/keyframe-input.scss';
+
 .container{
   .validationDivPassword_enabled{
     -webkit-animation: swing-in-top-fwd 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
@@ -49,6 +51,13 @@
       display: flex;
       flex-direction: column;
 
+      .helpField{
+
+        text-align: initial;
+        translate: 10%;
+        list-style-type: none;
+      }
+
     }
     .validationDivConfirmPassword_disabled{
       -webkit-animation: slide-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
@@ -58,8 +67,12 @@
       margin-bottom: 10px;
       display: flex;
       flex-direction: column;
-      .helpConfirm{
 
+      .helpField{
+
+        text-align: initial;
+        translate: 10%;
+        list-style-type: none;
       }
     }
 
