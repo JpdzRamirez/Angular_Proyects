@@ -7,7 +7,7 @@ import {HttpClient} from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class TraerDatosService  {
+export class apiDatosService  {
 
   private API_PERSONAJES="https://rickandmortyapi.com/api/character";
 

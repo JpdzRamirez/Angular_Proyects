@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MaterialCdkModule } from "../utils/material-cdk/material-cdk.module";
-import { RouterModule } from '@angular/router';
+import {MaterialCdkModule } from "../utils/material-cdk/material-cdk.module";
+import {RouterModule } from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
 
 import { HeaderComponent } from './components/header/header.component';
@@ -10,14 +10,11 @@ import { FooterComponent } from './components/footer/footer.component';
 
 
 const declarables = [ HeaderComponent, FooterComponent ];
+const imported=[   CommonModule,MaterialCdkModule,RouterModule,MatIconModule];
+
 @NgModule({
   declarations: [declarables],
-  imports: [
-    CommonModule,
-    MaterialCdkModule,
-    RouterModule,
-    MatIconModule
-  ],
-  exports: declarables,
+  imports: [imported],
+  exports: [declarables],
 })
 export class SharedModule { }

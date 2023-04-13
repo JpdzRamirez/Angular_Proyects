@@ -9,14 +9,6 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
 
-  // {
-  // path: '',
-  // children:[
-  //   {path: 'login', component: LoginComponent},
-  //   {path: 'signup', component: SignupComponent},
-  //   {path: 'forgot', component: ForgotComponent},
-  //   //{path: '**', redirectTo: 'login'}
-  //   ]},
     {
       path: '',
       component:HomeComponent,

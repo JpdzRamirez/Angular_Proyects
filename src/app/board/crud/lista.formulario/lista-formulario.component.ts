@@ -11,7 +11,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { Persona } from '../../../utils/objects/persona.class';
 
 //SERVICIOS IMPORTAR DATOS DEL API
-import { TraerDatosService } from '../../../utils/services/traer-datos.service';
+import { apiDatosService } from '../../../utils/services/traer-datos.service';
 import { ModificarDatosService } from '../../../utils/services/modificar-datos.service';
 
 
@@ -37,7 +37,7 @@ export class ListaFormularioComponent implements OnInit {
   public formulario:FormGroup;
 
   // CONSTRUCTOR
-  constructor(public dialog: MatDialog,private servicioGet:TraerDatosService,private servicioPOST:ModificarDatosService ) {
+  constructor(public dialog: MatDialog,private servicioGet:apiDatosService,private servicioPOST:ModificarDatosService ) {
     this.formulario=new FormGroup({
       nombre:new FormControl('',[Validators.required, Validators.minLength(5),],),
       genero:new FormControl('',[Validators.required, Validators.minLength(5),]),

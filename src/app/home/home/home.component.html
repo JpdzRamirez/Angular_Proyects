@@ -1,7 +1,8 @@
-<app-header></app-header>
-<div class="bodyLogin">
+<div class="bodyLogin backgroundMoving">
   <div class="login">
+    <div class="transitionsImgTimer">
+      <img #imgTransition_1 [src]="getImageShow()">
+  </div>
     <router-outlet></router-outlet>
   </div>
 </div>
-

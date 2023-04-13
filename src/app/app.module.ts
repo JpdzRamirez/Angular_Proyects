@@ -40,11 +40,7 @@ import { MatIconModule} from '@angular/material/icon';
     BoardModule,
     HomeModule,
     MaterialCdkModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatIconModule,
-  ],
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
