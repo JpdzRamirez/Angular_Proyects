@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild,AfterViewInit} from '@angular/core';
+
 import { myfunctionsService } from 'src/app/utils/services/my-functions.service';
 
 
@@ -7,9 +8,9 @@ import { myfunctionsService } from 'src/app/utils/services/my-functions.service'
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
-  @ViewChild('#imgTransition_1', { static: false })
-  imgTransition_1: ElementRef<HTMLInputElement> = {} as ElementRef;
+export class HomeComponent implements AfterViewInit {
+
+  @ViewChild('backTransition',{static:false})backTransition: ElementRef<HTMLInputElement> = {} as ElementRef;
 
   private imageShow:string="../../../assets/image-backgrounds/home-5.jpg";
 
@@ -32,32 +33,37 @@ export class HomeComponent implements OnInit {
       '../../../assets/image-backgrounds/home-5.jpg'
     );
   }
-  ngOnInit(): void {
-    console.log('timer call');
+
+  ngAfterViewInit() {
     this.timerOutput();
   }
   public getImageShow():string{
     return this.imageShow;
   }
+
   public timerOutput(){
     //console.log('timer output');
     let seconds = 1;
     var image_to_show = 0;
-    const asImgElement_1 = this.imgTransition_1.nativeElement;
+    const asImgElement1 = this.backTransition.nativeElement;
 
-    setInterval(() => {
-      // set attribute value after 3 seconds,
+    setInterval(() => { // set attribute value after 3 seconds,
+     // console.log(asImgElement1.classList);
+      this.herramientas.removedClass(asImgElement1,'fadeIn');
+      this.herramientas.addedClass(asImgElement1,'fadeOut');
       //console.log('timer start');
-
-      if (image_to_show >= this.imgTransitionList.length - 1) {
-        //Return to the first one
-        image_to_show = 0;
-      } else {
-        image_to_show++;
-      }
-      // console.log(this.imgTransitionList[image_to_show]);
-      this.imageShow=this.imgTransitionList[image_to_show];
-
-    }, seconds * 6000);
+      setTimeout(()=>{
+        if (image_to_show >= this.imgTransitionList.length - 1) {
+          //Return to the first one
+          image_to_show = 0;
+        } else {
+          image_to_show++;
+        }
+        this.herramientas.addedClass(asImgElement1,'fadeIn');
+        this.herramientas.removedClass(asImgElement1,'fadeOut');
+        // console.log(this.imgTransitionList[image_to_show]);
+        this.imageShow=this.imgTransitionList[image_to_show];
+      }, seconds * 1000);
+    }, seconds * 10000);
   }
 }

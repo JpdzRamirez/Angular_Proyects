@@ -10,7 +10,7 @@ import { BoardModule } from './board/board.module';
 import { HomeModule } from './home/home.module';
 
 
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 //Animation
 import { BrowserModule } from '@angular/platform-browser';
@@ -19,10 +19,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // MATERIAL
 
 import { MaterialCdkModule } from './utils/material-cdk/material-cdk.module';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatSelectModule} from '@angular/material/select';
-import { MatIconModule} from '@angular/material/icon';
+import { LoadingInterceptor } from './shared/spinner.interceptor';
+
+
 
 
 
@@ -41,7 +40,11 @@ import { MatIconModule} from '@angular/material/icon';
     HomeModule,
     MaterialCdkModule,
     ],
-  providers: [],
+  providers: [
+    {
+    provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
+    }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

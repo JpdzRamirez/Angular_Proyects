@@ -1,20 +1,29 @@
+@import '../animations/keyframe-imgTimer.scss';
+@import '../animations/keyframe-background.scss';
+.fadeIn{
+  -webkit-animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both, slidein 100s infinite both;;
+	animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both , slidein 100s infinite both;;
 
-
-.transitionsImgTimer{
-
-  position: relative;
-  width: 400px;
-  height: 200px;
-
-  -webkit-animation: slidein 100s;
-  animation: slidein 100s;
 
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
+  // -webkit-animation-iteration-count: infinite;
+  // animation-iteration-count: infinite;
 
   -webkit-animation-direction: alternate;
   animation-direction: alternate;
+}
+.fadeOut{
+  -webkit-animation: fade-out 1s ease-out both,slidein 100s infinite both;;
+	        animation: fade-out 1s ease-out both, slidein 100s infinite both;;
+
+          -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+
+          // -webkit-animation-iteration-count: infinite;
+          // animation-iteration-count: infinite;
+
+          -webkit-animation-direction: alternate;
+          animation-direction: alternate;
 }

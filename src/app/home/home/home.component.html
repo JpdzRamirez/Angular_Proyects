@@ -1,8 +1,12 @@
-<div class="bodyLogin backgroundMoving">
-  <div class="login">
-    <div class="transitionsImgTimer">
-      <img #imgTransition_1 [src]="getImageShow()">
+<!-- FALTA APLICAR LAZY LOADING AL BACKGROUND ❌ -->
+<div #backTransition class="bodyLogin background fadeIn " style="background-image: url('{{getImageShow()}}');">
   </div>
-    <router-outlet></router-outlet>
-  </div>
-</div>
+    <div class="login">
+      <router-outlet></router-outlet>
+    </div>
+
+
+
+  <!-- <div class="transitionsImgTimer">
+      <img #imgTransition_1 [src]="getImageShow()" >
+  </div> -->
