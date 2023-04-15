@@ -25,7 +25,7 @@ export class LoadingInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       finalize(() => {
         this.totalRequests--;
-        if (this.totalRequests == 200) {
+        if (this.totalRequests == 0) {
           this.loadingService.hide();
         }
       })

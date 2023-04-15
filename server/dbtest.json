@@ -1,72 +1,105 @@
 {
-  "posts": [
+  "colegios": [
+    { "id": 1, "title": "json-server", "author": "typicode" },
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode",
-      "categoryId":1
-    },
-    {
-      "id": 2,
-      "title": "EL PERRON",
-      "author": "ACJPDZ",
-      "categoryId":2
-    },
-    {
-      "id": 3,
-      "title": "EL vergas",
-      "author": "ACJPDZ",
-      "categoryId":1
-    }
-  ],
-  "categories": [
-    {
-      "id": 1,
-      "body": "esta es la prueba del servidor",
-      "postId": 1
-    },
-    {
-      "id": 2,
-      "body": "Esto es contenido ACJPDZ",
-      "postId": 2
-    }
-  ],
-
-
-  "quiz": [{
-    "sport": {
-        "q1": {
-            "question": "Which one is correct team name in NBA?",
-            "options": [
-                "New York Bulls",
-                "Los Angeles Kings",
-                "Golden State Warriros",
-                "Huston Rocket"
-            ],
-            "answer": "Huston Rocket"
+    "id": 2,
+    "colegio": "Colegio Santo Angel",
+    "jornada": "Mañana",
+    "grados":[
+      "Sexto",
+      "Septimo"
+    ]
+}],
+"Grados": [
+  {
+    "Sexto": [
+      {
+        "NoAlumnos": "5",
+        "PromedioCurso": "3.5",
+        "Inscritos": [
+          {
+            "Id": "1",
+            "Nombres": "Fredy Alejandro",
+            "Apellidos": "Anaya Calderon",
+            "Edad": "14",
+            "Promedio": "3.2",
+            "Cumpleaños":"17-03-97"
+          },
+          {
+            "Id": "2",
+            "Nombres": "Alejandra",
+            "Apellidos": "Martinez Fuentes",
+            "Edad": "13",
+            "Promedio": "3.8"
+          },
+          {
+            "Id": "3",
+            "Nombres": "Daniel",
+            "Apellidos": "Guzman Perez",
+            "Edad": "12",
+            "Promedio": "3.3"
+          },
+          {
+            "Id": "4",
+            "Nombres": "Daniela",
+            "Apellidos": "Ortega Duran",
+            "Edad": "15",
+            "Promedio": "3.5"
+          },
+          {
+            "Id": "5",
+            "Nombres": "Esteven",
+            "Apellidos": "Rey Reyes",
+            "Edad": "15",
+            "Promedio": "3.7"
+          }
+        ]
       }
-              },
-    "maths": {
-        "q1": {
-            "question": "5 + 7 = ?",
-            "options": [
-                "10",
-                "11",
-                "12",
-                "13"
-            ],
-            "answer": "12"
-              },
-        "q2": {
-            "question": "12 - 8 = ?",
-            "options": [
-                "1",
-                "2",
-                "3",
-                "4"
-            ],
-            "answer": "4"
-        }
-    }
-  }]
+    ],
+    "Septimo": [
+      {
+        "NoAlumnos": "5",
+        "PromedioCurso": "3.6",
+        "Inscritos": [
+          {
+            "Id": "1",
+            "Nombres": "Juan Jose",
+            "Apellidos": "Carvajal Arevalo",
+            "Edad": "13",
+            "Promedio": "3.4"
+          },
+          {
+            "Id": "2",
+            "Nombres": "Nicolas",
+            "Apellidos": "Bueno Meza",
+            "Edad": "12",
+            "Promedio": "4.0"
+          },
+          {
+            "Id": "3",
+            "Nombres": "Jeremy Ivan",
+            "Apellidos": "Hernandez Pedraza",
+            "Edad": "13",
+            "Promedio": "3.4"
+          },
+          {
+            "Id": "4",
+            "Nombres": "Lina",
+            "Apellidos": "Villota Perez",
+            "Edad": "12",
+            "Promedio": "4.1"
+          },
+          {
+            "Id": "5",
+            "Nombres": "Diego Felipe",
+            "Apellidos": "Castro Frenandez",
+            "Edad": "13",
+            "Promedio": "3.3"
+          }
+        ]
+      }
+    ]
+  }
+],
+  "profile": { "name": "typicode" }
 }

@@ -9,6 +9,9 @@ import { myfunctionsService } from 'src/app/utils/services/my-functions.service'
 
 import { Router } from '@angular/router';
 
+import { Persona } from 'src/app/utils/objects/persona.class';
+import { UsuariosService } from 'src/app/utils/services/usuarios.service';
+
 @Component({
   selector: 'app-Login',
   templateUrl: './login.component.html',
@@ -17,7 +20,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit{
 
-
+  //DATA BASE USERS
+  private usuariosLogin:Array<Persona>=[];
 
     //DOOM ELEMENT CHILD ACCESS
     @ViewChild('userValidation', {static: false})userInput:ElementRef<HTMLInputElement> = {} as ElementRef;
@@ -37,13 +41,10 @@ export class LoginComponent implements OnInit{
       private  numbers;
       private  especialLetters;
 
-
-
-      ngOnInit(): void {
-
-      }
-
-      constructor(private fb:FormBuilder,private herramientas:myfunctionsService,private router:Router){
+      constructor(private fb:FormBuilder,
+                  private herramientas:myfunctionsService,
+                  private router:Router,
+                  private usuariosService:UsuariosService){
 
         this.form  = this.fb.group({
               user:['',[Validators.required, Validators.minLength(6)]],
@@ -56,7 +57,15 @@ export class LoginComponent implements OnInit{
           this.especialLetters=/[!@?=.*&%$#]/d;
       }
 
+      ngOnInit(): void {
+        this.usuariosService.cargarUsuarios().subscribe(usuarios => {
+          this.setListaUsuarios(usuarios.results);
+        });
+      }
 
+      public setListaUsuarios(lista:any){
+        this.usuariosLogin=lista;
+      }
 
       public updateClassPasswordField(parametro:any):any{
         return{
