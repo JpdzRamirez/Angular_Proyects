@@ -1,5 +1,5 @@
-import { Component, ElementRef,Input,
-OnInit, ViewChild,AfterViewInit,AfterContentInit } from '@angular/core';
+import { Component, ElementRef,
+OnInit, ViewChild } from '@angular/core';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 
 
@@ -9,8 +9,8 @@ import { myfunctionsService } from 'src/app/utils/services/my-functions.service'
 
 import { Router } from '@angular/router';
 
-import { Persona } from 'src/app/utils/objects/persona.class';
 import { UsuariosService } from 'src/app/utils/services/usuarios.service';
+import { Usuario } from 'src/app/utils/objects/usuario.class';
 
 @Component({
   selector: 'app-Login',
@@ -21,7 +21,7 @@ import { UsuariosService } from 'src/app/utils/services/usuarios.service';
 export class LoginComponent implements OnInit{
 
   //DATA BASE USERS
-  private usuariosLogin:Array<Persona>=[];
+    private usuariosLogin:Array<Usuario>=[];
 
     //DOOM ELEMENT CHILD ACCESS
     @ViewChild('userValidation', {static: false})userInput:ElementRef<HTMLInputElement> = {} as ElementRef;
@@ -59,13 +59,31 @@ export class LoginComponent implements OnInit{
 
       ngOnInit(): void {
         this.usuariosService.cargarUsuarios().subscribe(usuarios => {
-          this.setListaUsuarios(usuarios.results);
+          this.setListaUsuarios(usuarios);
         });
       }
 
       public setListaUsuarios(lista:any){
-        this.usuariosLogin=lista;
+        //console.log(lista);
+
+        //this.usuariosService.editarUsuarios(lisata[1]);
+        for(var i=0; i<lista.length; i++){
+          let usuarioTemp:Usuario=new Usuario();
+          usuarioTemp.setId(lista[i].id);
+          usuarioTemp.setNombre(lista[i].name);
+          usuarioTemp.setCorreo(lista[i].email);
+          usuarioTemp.setDireccion(lista[i].address)
+          usuarioTemp.setTelefono(lista[i].phone);
+          usuarioTemp.setCompañia(lista[i].company);
+          usuarioTemp.setWebsite(lista[i].website);
+
+          this.usuariosLogin.push(usuarioTemp);
+        }
+        //console.log(this.usuariosLogin);
       }
+      public getListaUsuarios(){
+        return this.usuariosLogin;
+    }
 
       public updateClassPasswordField(parametro:any):any{
         return{
@@ -177,11 +195,19 @@ export class LoginComponent implements OnInit{
       ingresar(){
         if (this.form.valid){
           console.log("Todos los datos son válidos");
-          console.log(this.form.value);
+          //console.log(this.form.value);
+          let temp;
+          let found = this.usuariosLogin.find((obj) => {
+            return obj.getUsuario() === this.form.controls['user'].value && obj.getPassword()===this.form.controls['password'].value;
+          });
+          console.log(found);
+          if(found?.getNombre()!=null){
+            console.log("null exception");
+          }
         }
       else{
         console.log("Hay datos inválidos en el formulario");
-      }
+          }
       }
       registrar(){
         this.router.navigate(['home/signup']);
@@ -190,7 +216,4 @@ export class LoginComponent implements OnInit{
 
 
 
-function passwordMatchValidator(g: FormGroup) {
-  //return g.get('contraseña').value === g.get('contraseña').value
-     //? null : {'mismatch': true};
-}
+

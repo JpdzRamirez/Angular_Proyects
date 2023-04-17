@@ -17,11 +17,12 @@ import { HomeComponent } from './home/home.component';
 
 
 import { SharedModule } from '../shared/shared.module';
+import { MainComponent } from '../main/main.component';
 
 
-const declaration=[ForgotComponent,LoginComponent,SignupComponent];
+const declaration=[ForgotComponent,LoginComponent,SignupComponent,MainComponent];
 
-const exported=[LoginComponent, SignupComponent,ForgotComponent];
+const exported=[LoginComponent, SignupComponent,ForgotComponent,MainComponent];
 
 const imported=[HomeRoutingModule,MaterialCdkModule,CommonModule,CoreModule,SharedModule];
 

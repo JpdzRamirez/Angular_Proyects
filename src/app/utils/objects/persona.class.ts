@@ -6,6 +6,7 @@ private image:string='';
 private genero:string='';
 private especie:string='';
 
+
 constructor() {}
 
 setId(id:string){

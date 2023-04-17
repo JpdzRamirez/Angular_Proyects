@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild,AfterViewInit} from '@angular/core';
+import { Component, ElementRef, ViewChild,AfterViewInit, EventEmitter, Output} from '@angular/core';
 
 import { myfunctionsService } from 'src/app/utils/services/my-functions.service';
 
@@ -9,6 +9,8 @@ import { myfunctionsService } from 'src/app/utils/services/my-functions.service'
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements AfterViewInit {
+
+
 
   @ViewChild('backTransition',{static:false})backTransition: ElementRef<HTMLInputElement> = {} as ElementRef;
 

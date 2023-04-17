@@ -20,6 +20,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialCdkModule } from './utils/material-cdk/material-cdk.module';
 import { LoadingInterceptor } from './shared/spinner.interceptor';
+import { ErrorIntercept } from './shared/error.interceptor';
+
 
 
 
@@ -43,6 +45,11 @@ import { LoadingInterceptor } from './shared/spinner.interceptor';
   providers: [
     {
     provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorIntercept,
+      multi: true
     }
 ],
   bootstrap: [AppComponent]

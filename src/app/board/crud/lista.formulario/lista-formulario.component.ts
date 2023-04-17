@@ -12,7 +12,9 @@ import { Persona } from '../../../utils/objects/persona.class';
 
 //SERVICIOS IMPORTAR DATOS DEL API
 import { apiDatosService } from '../../../utils/services/traer-datos.service';
-import { ModificarDatosService } from '../../../utils/services/modificar-datos.service';
+
+import { Usuario } from 'src/app/utils/objects/usuario.class';
+import { UsuariosService } from 'src/app/utils/services/usuarios.service';
 
 
 @Component({
@@ -24,7 +26,7 @@ export class ListaFormularioComponent implements OnInit {
 
   // BINDINGS
   //@Input() listaFormulario: any={};
-  @Output() newItemEvent = new EventEmitter<string>();
+  private usuariosLogin:Array<Usuario>=[];
 
 
   // VARIABLES
@@ -37,7 +39,9 @@ export class ListaFormularioComponent implements OnInit {
   public formulario:FormGroup;
 
   // CONSTRUCTOR
-  constructor(public dialog: MatDialog,private servicioGet:apiDatosService,private servicioPOST:ModificarDatosService ) {
+  constructor(public dialog: MatDialog,
+    private servicioGet:apiDatosService,
+    private usuariosService:UsuariosService ) {
     this.formulario=new FormGroup({
       nombre:new FormControl('',[Validators.required, Validators.minLength(5),],),
       genero:new FormControl('',[Validators.required, Validators.minLength(5),]),
@@ -47,12 +51,14 @@ export class ListaFormularioComponent implements OnInit {
   }
   // setting data from api in list
   ngOnInit(){
-    this.servicioGet.getUsers().subscribe(resp=>{
-      this.setListaDatos(resp.results);
-      });
+    this.usuariosService.cargarUsuarios().subscribe(usuarios => {
+      this.setListaUsuarios(usuarios);
+    });
 
     }
-
+    public setListaUsuarios(lista:any){
+      this.usuariosLogin=lista;
+    }
 
   // SETTERS
   public setButtonVisible(state:boolean):void {

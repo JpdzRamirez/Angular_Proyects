@@ -1,11 +1,12 @@
 import { Component, ElementRef,Output,
-  OnInit, ViewChild,AfterViewInit,AfterContentInit, Renderer2,RendererFactory2  } from '@angular/core';
+  OnInit, ViewChild,AfterViewInit,AfterContentInit, Renderer2,RendererFactory2, Input  } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
 import { myValidations } from '../../utils/my-validations';
 import { myfunctionsService } from '../../utils/services/my-functions.service';
 import { UsuariosService } from 'src/app/utils/services/usuarios.service';
 import { Router } from '@angular/router';
+import { Usuario } from 'src/app/utils/objects/usuario.class';
 
 
 @Component({
@@ -15,6 +16,10 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent implements OnInit {
 
+
+
+     //DATA BASE USERS
+    private usuariosLogin:Array<Usuario>=[];
 
     //DOOM ELEMENT CHILD ACCESS
     @ViewChild('userValidation', {static: false})userInput:ElementRef<HTMLInputElement> = {} as ElementRef;
@@ -38,7 +43,7 @@ export class SignupComponent implements OnInit {
       constructor(
         private fb:FormBuilder,
         private herramientas:myfunctionsService,
-        private Usuarios:UsuariosService,
+        private usuariosService:UsuariosService,
         private router:Router,
         ){
         //this.renderer2 = rendererFactory.createRenderer(null, null);
@@ -72,11 +77,28 @@ export class SignupComponent implements OnInit {
       // }
 
       ngOnInit(): void {
-        this.Usuarios.cargarUsuarios().subscribe(resp=>{
-          console.log(resp);
+        this.usuariosService.cargarUsuarios().subscribe(usuarios=>{
+          this.setListaUsuarios(usuarios);
         });
       }
 
+      public setListaUsuarios(lista:any){
+        //console.log(lista);
+        //this.usuariosService.editarUsuarios(lisata[1]);
+        for(var i=0; i<lista.length; i++){
+          let usuarioTemp:Usuario=new Usuario();
+          usuarioTemp.setId(lista[i].id);
+          usuarioTemp.setNombre(lista[i].name);
+          usuarioTemp.setCorreo(lista[i].email);
+          usuarioTemp.setDireccion(lista[i].address);
+          usuarioTemp.setTelefono(lista[i].phone);
+          usuarioTemp.setCompañia(lista[i].company);
+          usuarioTemp.setWebsite(lista[i].website);
+
+          this.usuariosLogin.push(usuarioTemp);
+        }
+        //console.log(this.usuariosLogin);
+      }
 
     // public updatePasswordFieldConfirm(parametro:any):any{
     //   return{
@@ -215,10 +237,14 @@ export class SignupComponent implements OnInit {
 
       }
 
-      ingresar(){
+      registrar(){
         if (this.form.valid){
           console.log("Todos los datos son válidos");
           console.log(this.form.value);
+          let temp;
+          const found = this.usuariosLogin.find((obj) => {
+            return obj.getUsuario() === this.form.controls['user'].value && obj.getPassword()===this.form.controls['password'].value;
+          });
         }
       else{
         console.log("Hay datos inválidos en el formulario");
