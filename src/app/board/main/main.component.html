@@ -1,0 +1,7 @@
+<form (ngSubmit)="submit(user)"
+#user="ngForm" novalidate>
+<input type="text"  name="usuario" required/>
+<input type="password" name="password" required/>
+<input type="submit" [disabled]="user.invalid"/>
+</form>
+

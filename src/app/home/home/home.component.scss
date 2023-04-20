@@ -3,7 +3,7 @@
 @import '../../utils/scss/background-styles.scss';
 @import '../../utils/scss/transitions/transition-imgTimer-styles.scss';
 @import url('https://fonts.googleapis.com/css2?family=Donegal+One&display=swap');
-
+@import '../../utils/scss/bodybutton-home-styles.scss';
 
 .bodyLogin{
   display: flex;
@@ -22,7 +22,7 @@
 
 .login{
   margin-bottom: 10vh !important;
-  width: 70%;
+  width: 100%;
   filter: blur(0px);
   text-align: center;
   position: absolute;

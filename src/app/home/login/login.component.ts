@@ -200,7 +200,9 @@ export class LoginComponent implements OnInit{
           let found = this.usuariosLogin.find((obj) => {
             return obj.getUsuario() === this.form.controls['user'].value && obj.getPassword()===this.form.controls['password'].value;
           });
-          console.log(found);
+          console.log(this.usuariosLogin.find((obj) => {
+            return obj.getUsuario() === this.form.controls['user'].value && obj.getPassword()===this.form.controls['password'].value;
+          }));
           if(found?.getNombre()!=null){
             console.log("null exception");
           }

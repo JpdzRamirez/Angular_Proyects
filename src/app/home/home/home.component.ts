@@ -43,6 +43,9 @@ export class HomeComponent implements AfterViewInit {
     return this.imageShow;
   }
 
+
+  //TIMER FOR TRANSITIONS BACKGROUNDS
+
   public timerOutput(){
     //console.log('timer output');
     let seconds = 1;
@@ -67,5 +70,12 @@ export class HomeComponent implements AfterViewInit {
         this.imageShow=this.imgTransitionList[image_to_show];
       }, seconds * 1000);
     }, seconds * 10000);
+  }
+
+
+  // NAVIGATE LINKS
+
+  public loginButton(){
+    console.log("logged in navigate");
   }
 }

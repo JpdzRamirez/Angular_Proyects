@@ -17,7 +17,7 @@ import { HomeComponent } from './home/home.component';
 
 
 import { SharedModule } from '../shared/shared.module';
-import { MainComponent } from '../main/main.component';
+import { MainComponent } from '../board/main/main.component';
 
 
 const declaration=[ForgotComponent,LoginComponent,SignupComponent,MainComponent];
