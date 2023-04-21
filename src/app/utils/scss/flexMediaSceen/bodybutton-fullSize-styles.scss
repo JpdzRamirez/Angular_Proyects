@@ -52,6 +52,9 @@
 
 
   .explainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     font-weight: 300;
     font-size: 2rem;
     color: #fff;
@@ -62,10 +65,6 @@
     background-image: radial-gradient(circle at center top, #cce, rgb(0, 0, 0));
     border-radius: 10px;
     text-shadow: 0 0 10px rgba(255, 255, 255, .8);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
 

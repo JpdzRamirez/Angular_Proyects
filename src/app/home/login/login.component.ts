@@ -203,8 +203,10 @@ export class LoginComponent implements OnInit{
           console.log(this.usuariosLogin.find((obj) => {
             return obj.getUsuario() === this.form.controls['user'].value && obj.getPassword()===this.form.controls['password'].value;
           }));
+
           if(found?.getNombre()!=null){
             console.log("null exception");
+            this.router.navigate(['home/signup']);
           }
         }
       else{
